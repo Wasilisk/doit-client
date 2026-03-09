@@ -1,0 +1,10 @@
+<template>
+  <div class="min-h-screen bg-cover bg-center bg-no-repeat" style="background-image: url('/images/auth-bg.jpg')">
+    <div class="min-h-screen flex items-center justify-center p-4 bg-black/20">
+      <div class="w-full max-w-md">
+        <slot />
+      </div>
+      <Toast />
+    </div>
+  </div>
+</template>
