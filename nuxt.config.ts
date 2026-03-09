@@ -10,17 +10,39 @@ export default defineNuxtConfig({
   },
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
-  modules: ['@primevue/nuxt-module', '@pinia/nuxt'],
+  modules: ['@primevue/nuxt-module', '@pinia/nuxt', '@nuxtjs/i18n'],
   css: ['./app/assets/css/main.css'],
+  routeRules: {
+    '/login': { ssr: false },
+    '/register': { ssr: false },
+  },
   vite: {
     // @ts-expect-error
-    plugins: [tailwindcss()],
+    plugins: [tailwindcss(), { src: '@/plugins/country-flag.client.js' }],
   },
   primevue: {
+    autoImport: true,
     options: {
       theme: {
-        preset: Aura
+        preset: Aura,
+        options: {
+          darkModeSelector: '.my-app-dark',
+          cssLayer: {
+            name: 'primevue',
+            order: 'theme, base, primevue'
+          }
+        }
       }
+    },
+    directives: {
+      include: ['Tooltip']
     }
+  },
+  i18n: {
+    defaultLocale: 'en',
+    locales: [
+      { code: 'en', name: 'English', file: 'en.json' },
+      { code: 'ua', name: 'Ukraine', file: 'ua.json' }
+    ]
   }
 })

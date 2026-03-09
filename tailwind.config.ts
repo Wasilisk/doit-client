@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+    important: true,
     content: [
         './app/components/**/*.{vue,ts}',
         './app/layouts/**/*.{vue,ts}',
