@@ -2,8 +2,8 @@ import { z } from 'zod'
 import { toTypedSchema } from '@vee-validate/zod'
 
 export const loginZodSchema = z.object({
-    email: z.string().email('validation.email.invalid'),
-    password: z.string().min(6, 'validation.password.minLength'),
+    email: z.string().email('email.invalid'),
+    password: z.string().min(6, 'password.minLength'),
 })
 
 export type LoginSchema = z.infer<typeof loginZodSchema>
