@@ -31,15 +31,6 @@ export function useApiErrorHandler() {
         return translate(key, e.message) ?? t('errors.INTERNAL_ERROR')
     }
 
-    const getFieldErrorsText = (fields: FieldError[]): string =>
-        fields
-            .map((f) => {
-                const key = `validation.${f.code}`
-                const message = translate(key, f.message, f.context)
-                return `${f.field}: ${message}`
-            })
-            .join('\n')
-
     const showToast = (summary: string, detail: string) => {
         toast.add({
             severity: 'error',
@@ -54,11 +45,6 @@ export function useApiErrorHandler() {
 
         if (!isApiError(e)) {
             showToast(t('general.error'), t('errors.INTERNAL_ERROR'))
-            return
-        }
-
-        if (e.fields?.length) {
-            showToast(getErrorMessage(e), getFieldErrorsText(e.fields))
             return
         }
 
