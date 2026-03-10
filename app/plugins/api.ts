@@ -25,8 +25,7 @@ export default defineNuxtPlugin(() => {
                 }
             }
 
-            const message = response._data?.error || response._data?.message || 'Something went wrong'
-            throw new Error(message)
+            throw response._data?.error || response._data?.message || 'Something went wrong'
         },
     })
 

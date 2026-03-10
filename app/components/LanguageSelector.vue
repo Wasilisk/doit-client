@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import VueCountryFlag from 'vue-country-flag-next'
+import type { Locale } from '~/types/i18n'
 
 const { locale, locales, setLocale } = useI18n()
 
@@ -12,20 +13,20 @@ const localeOptions = computed(() =>
     }))
 )
 
-const countryMap: Record<string, string> = {
+const countryMap: Record<Locale, string> = {
     en: 'us',
     ua: 'ua',
 }
 
-function localeToCountry(code: string): string {
+function localeToCountry(code: Locale): string {
     return countryMap[code] ?? code
 }
 
-function localeLabel(code: string): string {
+function localeLabel(code: Locale): string {
     return localeOptions.value.find((o) => o.value === code)?.label ?? code
 }
 
-async function switchLanguage(e: { value: 'en' | 'ua' }) {
+async function switchLanguage(e: { value: Locale }) {
     await setLocale(e.value)
     selectedLocale.value = e.value
 }
