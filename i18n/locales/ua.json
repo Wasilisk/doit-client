@@ -1,0 +1,66 @@
+{
+    "general": {
+      "error": "Сталася помилка"
+    },
+    "errors": {
+      "INTERNAL_ERROR": "Внутрішня помилка",
+      "UNAUTHORIZED": "Не авторизовано",
+      "NOT_FOUND": "Не знайдено",
+      "VALIDATION_ERROR": "Помилка валідації",
+      "EMAIL_ALREADY_EXISTS": "Електронна адреса вже існує",
+      "INVALID_CREDENTIALS": "Невірні облікові дані",
+      "PASSWORD_HASHING_FAILED": "Не вдалося обробити пароль",
+      "PROFILE_CREATION_FAILED": "Не вдалося створити профіль",
+      "USER_WITH_EMAIL_NOT_FOUND": "Користувача з такою електронною адресою не знайдено"
+    },
+    "validation": {
+      "general": {
+        "required": "Це поле є обов’язковим"
+      },
+      "email": {
+        "required": "Електронна адреса є обов’язковою",
+        "invalid": "Введіть коректну електронну адресу"
+      },
+      "fullName": {
+        "required": "ПІБ є обов’язковим"
+      },
+      "password": {
+        "minLength": "Пароль має містити щонайменше {min} символів"
+      },
+      "confirmPassword": {
+        "required": "Будь ласка, підтвердіть свій пароль",
+        "notMatch": "Паролі не співпадають"
+      }
+    },
+    "auth": {
+      "register": {
+        "title": "Реєстрація",
+        "alreadyHaveAccount": "Вже маєте акаунт? {link}",
+        "link": "Увійти тут",
+        "submit": "Зареєструватися"
+      },
+      "login": {
+        "title": "Вхід",
+        "dontHaveAccount": "Немає акаунта? {link}",
+        "link": "Зареєструватися тут",
+        "submit": "Увійти"
+      }
+    },
+    "fields": {
+        "email": {
+          "placeholder": "Електронна адреса",
+          "weak_label": "Цей пароль занадто слабкий",
+          "medium_label": "Цей пароль середньої надійності",
+          "strong_label": "Цей пароль надійний"
+        },
+        "fullName": {
+          "placeholder": "Повне ім’я"
+        },
+        "password": {
+          "placeholder": "Пароль"
+        },
+        "confirmPassword": {
+          "placeholder": "Підтвердіть пароль"
+        }
+      }
+  }
