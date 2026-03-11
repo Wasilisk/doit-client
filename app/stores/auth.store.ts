@@ -1,13 +1,8 @@
-
 import { defineStore } from 'pinia'
 
-interface AuthState {
-    token: string | null
-}
-
 export const useAuthStore = defineStore('auth', {
-    state: (): AuthState => ({
-        token: null,
+    state: () => ({
+        token: null as string | null,
     }),
 
     getters: {
@@ -17,17 +12,23 @@ export const useAuthStore = defineStore('auth', {
     actions: {
         setToken(token: string) {
             this.token = token
-            localStorage.setItem('auth_token', token)
+            const cookie = useCookie('auth_token', {
+                maxAge: 60 * 60 * 24 * 7, // 7 days
+                sameSite: 'lax',
+                secure: true,
+            })
+            cookie.value = token
         },
 
         loadFromStorage() {
-            const token = localStorage.getItem('auth_token')
-            if (token) this.token = token
+            const cookie = useCookie('auth_token')
+            if (cookie.value) this.token = cookie.value
         },
 
         logout() {
             this.token = null
-            localStorage.removeItem('auth_token')
+            const cookie = useCookie('auth_token')
+            cookie.value = null
         }
     }
 })
