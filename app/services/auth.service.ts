@@ -12,7 +12,7 @@ interface LoginRequest {
 }
 
 interface AuthResponse {
-    accessToken: string
+    token: string
 }
 
 export const useAuthService = () => {
