@@ -42,7 +42,7 @@ export default defineNuxtConfig({
     defaultLocale: 'en',
     locales: [
       { code: 'en', name: 'English', file: 'en.json' },
-      { code: 'ua', name: 'Ukraine', file: 'ua.json' }
+      { code: 'ua', name: 'Українська', file: 'ua.json' }
     ]
   }
 })
