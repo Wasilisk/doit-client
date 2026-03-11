@@ -12,6 +12,7 @@ export interface AuthFieldProps {
     feedback?: boolean
 }
 
+const { t } = useI18n()
 const attrs = useAttrs()
 const props = withDefaults(defineProps<AuthFieldProps>(), {
     modelValue: '',
@@ -31,7 +32,9 @@ const translatedError = computed(() => resolveError(props.error))
     <div class="relative">
         <Password v-if="props.type === 'password'" :model-value="props.modelValue"
             @update:model-value="emit('update:modelValue', $event)" :placeholder="props.placeholder" v-bind="attrs"
-            :feedback="props.feedback" toggle-mask class="w-full" input-class="w-full" :invalid="!!props.error" />
+            :feedback="props.feedback" toggle-mask class="w-full" input-class="w-full" :invalid="!!props.error"
+            :weakLabel="t('fields.email.weak_label')" :mediumLabel="t('fields.email.medium_label')"
+            :strongLabel="t('fields.email.strong_label')" />
         <InputText v-else :value="props.modelValue"
             @input="emit('update:modelValue', ($event.target as HTMLInputElement).value)"
             :placeholder="props.placeholder" class="w-full" v-bind="attrs" :invalid="!!props.error" />
