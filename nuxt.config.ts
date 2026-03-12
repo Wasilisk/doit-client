@@ -1,24 +1,23 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
-import Aura from '@primeuix/themes/aura';
+import Aura from "@primeuix/themes/aura";
 import tailwindcss from "@tailwindcss/vite";
 
 export default defineNuxtConfig({
   runtimeConfig: {
     public: {
-      apiUrl: process.env.NUXT_PUBLIC_API_URL || 'http://localhost:8080'
-    }
+      apiUrl: process.env.NUXT_PUBLIC_API_URL || "http://localhost:8080",
+    },
   },
-  compatibilityDate: '2025-07-15',
+  compatibilityDate: "2025-07-15",
   devtools: { enabled: true },
-  modules: ['@primevue/nuxt-module', '@pinia/nuxt', '@nuxtjs/i18n'],
-  css: ['./app/assets/css/main.css'],
+  modules: ["@primevue/nuxt-module", "@pinia/nuxt", "@nuxtjs/i18n"],
   routeRules: {
-    '/login': { ssr: false },
-    '/register': { ssr: false },
+    "/login": { ssr: false },
+    "/register": { ssr: false },
   },
   vite: {
     // @ts-expect-error
-    plugins: [tailwindcss(), { src: '@/plugins/country-flag.client.js' }],
+    plugins: [tailwindcss(), { src: "@/plugins/country-flag.client.js" }],
   },
   primevue: {
     autoImport: true,
@@ -26,23 +25,21 @@ export default defineNuxtConfig({
       theme: {
         preset: Aura,
         options: {
-          darkModeSelector: '.my-app-dark',
-          cssLayer: {
-            name: 'primevue',
-            order: 'theme, base, primevue'
-          }
-        }
-      }
+          darkModeSelector: ".my-app-dark",
+        },
+        cssLayerOrder: "tailwind-base,primevue, tailwind-utilities",
+      },
     },
     directives: {
-      include: ['Tooltip']
-    }
+      include: ["Tooltip"],
+    },
   },
+  css: ["~/assets/css/main.css", "~/assets/css/tailwind.css"],
   i18n: {
-    defaultLocale: 'en',
+    defaultLocale: "en",
     locales: [
-      { code: 'en', name: 'English', file: 'en.json' },
-      { code: 'ua', name: 'Українська', file: 'ua.json' }
-    ]
-  }
-})
+      { code: "en", name: "English", file: "en.json" },
+      { code: "ua", name: "Українська", file: "ua.json" },
+    ],
+  },
+});
