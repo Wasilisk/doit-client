@@ -1,4 +1,5 @@
 import { useApiClient } from '~/composables/useApiClient'
+import type { User } from '~/types/user'
 
 interface RegisterRequest {
     email: string
@@ -24,5 +25,7 @@ export const useAuthService = () => {
     const register = (payload: RegisterRequest) =>
         api.post<RegisterRequest, AuthResponse>('/auth/register', payload)
 
-    return { login, register }
+    const fetchUserProfile = (): Promise<User> => api.get('/api/profile')
+
+    return { login, register, fetchUserProfile }
 }
