@@ -9,7 +9,7 @@ definePageMeta({ layout: 'auth' })
 const { t } = useI18n()
 const localePath = useLocalePath()
 const { login } = useAuthService()
-const { setToken } = useAuthStore()
+const { setToken, fetchMe } = useAuthStore()
 
 const { handleSubmit, errors, defineField } = useForm({
     validationSchema: loginSchema,
@@ -28,8 +28,8 @@ const [password, passwordAttrs] = useAdaptive('password')
 const handleLogin = handleSubmit(async (values) => {
     await execute(async () => {
         const response = await login({ email: values.email, password: values.password })
-        console.log("response", response)
         setToken(response.token)
+        await fetchMe()
         await navigateTo(localePath(ROUTES.TASKS))
     })
 })
