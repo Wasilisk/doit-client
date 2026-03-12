@@ -39,49 +39,37 @@ const handleLogout = async () => {
 
         <Divider class="my-0" />
 
-        <ClientOnly>
-            <div class="px-6 py-4 flex items-center gap-3" v-if="!authStore.isFetchingUser && authStore.user">
-                <Avatar
-                    v-if="authStore.user.avatar_url?.trim()"
-                    :image="authStore.user.avatar_url"
-                    size="large"
-                    shape="circle"
-                />
-                <Avatar
-                    v-else
-                    :label="userInitials"
-                    size="large"
-                    shape="circle"
-                    class="bg-amber-100 text-amber-800"
-                />
-                <div class="min-w-0">
-                    <p class="font-semibold text-sm text-gray-900 truncate">
-                        {{ authStore.user.full_name }}
-                    </p>
-                    <p class="text-xs text-gray-500 truncate">
-                        {{ authStore.user.email }}
-                    </p>
-                </div>
+        <div class="px-6 py-4 flex items-center gap-3" v-if="!authStore.isFetchingUser && authStore.user">
+            <Avatar
+                v-if="authStore.user.avatar_url"
+                :image="authStore.user.avatar_url"
+                size="large"
+                shape="circle"
+            />
+            <Avatar
+                v-else
+                :label="userInitials"
+                size="large"
+                shape="circle"
+                class="bg-amber-100 text-amber-800"
+            />
+            <div class="min-w-0">
+                <p class="font-semibold text-sm text-gray-900 truncate">
+                    {{ authStore.user.full_name }}
+                </p>
+                <p class="text-xs text-gray-500 truncate">
+                    {{ authStore.user.email }}
+                </p>
             </div>
+        </div>
 
-            <div class="px-6 py-4 flex items-center gap-3" v-else>
-                <Skeleton shape="circle" size="3rem" />
-                <div class="flex flex-col gap-2 flex-1">
-                    <Skeleton width="70%" height="0.75rem" />
-                    <Skeleton width="90%" height="0.625rem" />
-                </div>
+        <div class="px-6 py-4 flex items-center gap-3" v-else>
+            <Skeleton shape="circle" size="3rem" />
+            <div class="flex flex-col gap-2 flex-1">
+                <Skeleton width="70%" height="0.75rem" />
+                <Skeleton width="90%" height="0.625rem" />
             </div>
-
-            <template #fallback>
-                <div class="px-6 py-4 flex items-center gap-3">
-                    <Skeleton shape="circle" size="3rem" />
-                    <div class="flex flex-col gap-2 flex-1">
-                        <Skeleton width="70%" height="0.75rem" />
-                        <Skeleton width="90%" height="0.625rem" />
-                    </div>
-                </div>
-            </template>
-        </ClientOnly>
+        </div>
 
         <Divider class="my-0" />
 
@@ -91,7 +79,7 @@ const handleLogout = async () => {
                 :key="link.to"
                 :to="link.to"
                 class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-gray-600 transition-colors duration-200 hover:bg-amber-50 hover:text-amber-900"
-                active-class="bg-amber-100 text-amber-900 font-semibold"
+                exact-active-class="bg-amber-100 text-amber-900 font-semibold"
             >
                 <i :class="link.icon" class="text-base"></i>
                 <span>{{ link.label }}</span>
@@ -102,7 +90,7 @@ const handleLogout = async () => {
             <Divider class="mt-0 mb-3" />
             <button
                 @click="handleLogout"
-                class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-gray-600 transition-colors duration-200 hover:bg-red-50 hover:text-red-600 w-full"
+                class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-gray-600 transition-colors duration-200 hover:bg-red-50 hover:text-red-600 w-full cursor-pointer"
             >
                 <i class="pi pi-sign-out text-base"></i>
                 <span>Log Out</span>
