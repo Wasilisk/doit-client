@@ -23,6 +23,15 @@ const userInitials = computed(() => {
         .slice(0, 2)
 })
 
+const fullAvatarUrl = computed(() => {
+    if (!authStore.user?.avatar_url) return null
+    const baseUrl = useRuntimeConfig().public.apiUrl.replace(/\/$/, '')
+    const path = authStore.user.avatar_url.startsWith('/') 
+        ? authStore.user.avatar_url 
+        : `/${authStore.user.avatar_url}`
+    return `${baseUrl}${path}`
+})
+
 const handleLogout = async () => {
     authStore.logout()
     await navigateTo(localePath(ROUTES.LOGIN))
@@ -41,8 +50,8 @@ const handleLogout = async () => {
 
         <div class="px-6 py-4 flex items-center gap-3" v-if="!authStore.isFetchingUser && authStore.user">
             <Avatar
-                v-if="authStore.user.avatar_url"
-                :image="authStore.user.avatar_url"
+                v-if="fullAvatarUrl"
+                :image="fullAvatarUrl"
                 size="large"
                 shape="circle"
             />
