@@ -30,6 +30,9 @@
       "confirmPassword": {
         "required": "Будь ласка, підтвердіть свій пароль",
         "notMatch": "Паролі не співпадають"
+      },
+      "tagName": {
+        "required": "Назва тегу є обов’язковою"
       }
     },
     "auth": {
@@ -61,6 +64,9 @@
         },
         "confirmPassword": {
           "placeholder": "Підтвердіть пароль"
+        },
+        "tagName": {
+          "placeholder": "Назва тегу"
         }
       }
   }

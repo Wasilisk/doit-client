@@ -30,6 +30,9 @@
         "confirmPassword": {
             "required": "Please confirm your password",
             "notMatch": "Passwords do not match"
+        },
+        "tagName": {
+            "required": "Tag name is required"
         }
     },
     "auth": {
@@ -61,6 +64,9 @@
         },
         "confirmPassword": {
             "placeholder": "Confirm password"
+        },
+        "tagName": {
+            "placeholder": "Tag name"
         }
     }
 }

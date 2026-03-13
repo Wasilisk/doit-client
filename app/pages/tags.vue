@@ -94,7 +94,7 @@ const handleDelete = async (id: string) => {
                                 <AuthFormField 
                                     v-bind="nameAttrs" 
                                     v-model="name" 
-                                    placeholder="Tag Name" 
+                                    :placeholder="$t('fields.tagName.placeholder')" 
                                     :error="errors.name"
                                     @keyup.enter="saveEdit"
                                     @keyup.escape="cancelEdit"
