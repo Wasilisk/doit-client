@@ -1,6 +1,8 @@
 {
     "general": {
-        "error": "An error occurred"
+        "error": "An error occurred",
+        "confirm": "Confirm",
+        "cancel": "Cancel"
     },
     "errors": {
         "INTERNAL_ERROR": "Internal error",

@@ -16,6 +16,9 @@ const editingTagId = ref<string | null>(null)
 const isPatching = ref(false)
 const isDeleting = ref<string | null>(null)
 
+const isDeleteDialogOpen = ref(false)
+const pendingDeleteId = ref<string | null>(null)
+
 const { handleSubmit, errors, defineField, setValues, resetForm } = useForm<TagSchema>({
     validationSchema: tagSchema,
     initialValues: {
@@ -60,16 +63,23 @@ const saveEdit = handleSubmit(async (values) => {
     }
 })
 
-const handleDelete = async (id: string) => {
-    if (!confirm(t('tags.messages.deleteConfirm'))) return
-    isDeleting.value = id
+const confirmDelete = (id: string) => {
+    pendingDeleteId.value = id
+    isDeleteDialogOpen.value = true
+}
+
+const handleDelete = async () => {
+    if (!pendingDeleteId.value) return
+    isDeleting.value = pendingDeleteId.value
     try {
-        await deleteTag(id)
+        await deleteTag(pendingDeleteId.value)
         await refresh()
+        isDeleteDialogOpen.value = false
     } catch (e) {
         console.error(e)
     } finally {
         isDeleting.value = null
+        pendingDeleteId.value = null
     }
 }
 </script>
@@ -186,7 +196,7 @@ const handleDelete = async (id: string) => {
                                     :aria-label="$t('tags.actions.delete')" 
                                     :loading="isDeleting === data.id"
                                     :disabled="isPatching"
-                                    @click="handleDelete(data.id)" 
+                                    @click="confirmDelete(data.id)" 
                                 />
                             </template>
                         </div>
@@ -200,5 +210,15 @@ const handleDelete = async (id: string) => {
                 </template>
             </DataTable>
         </div>
+
+        <AppConfirmDialog
+            v-model:visible="isDeleteDialogOpen"
+            :title="$t('tags.actions.delete')"
+            :message="$t('tags.messages.deleteConfirm')"
+            :acceptLabel="$t('tags.actions.delete')"
+            :rejectLabel="$t('tags.actions.cancel')"
+            :loading="!!isDeleting"
+            @accept="handleDelete"
+        />
     </div>
 </template>
