@@ -68,5 +68,24 @@
         "tagName": {
           "placeholder": "Назва тегу"
         }
+      },
+      "tags": {
+        "title": "Теги",
+        "columns": {
+            "name": "Назва",
+            "color": "Колір",
+            "taskCount": "Кількість завдань",
+            "actions": "Дії"
+        },
+        "actions": {
+            "save": "Зберегти",
+            "cancel": "Скасувати",
+            "edit": "Редагувати",
+            "delete": "Видалити"
+        },
+        "messages": {
+            "deleteConfirm": "Ви впевнені, що хочете видалити цей тег?",
+            "empty": "Тегів не знайдено."
+        }
       }
   }

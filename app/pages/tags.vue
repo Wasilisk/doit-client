@@ -7,6 +7,7 @@ import AuthFormField from '~/components/auth/AuthFormField.vue'
 
 definePageMeta({ layout: 'dashboard' })
 
+const { t } = useI18n()
 const { fetchTags, updateTag, deleteTag } = useTagService()
 
 const { data: tags, refresh, pending } = useAsyncData('tags', () => fetchTags())
@@ -60,7 +61,7 @@ const saveEdit = handleSubmit(async (values) => {
 })
 
 const handleDelete = async (id: string) => {
-    if (!confirm('Are you sure you want to delete this tag?')) return
+    if (!confirm(t('tags.messages.deleteConfirm'))) return
     isDeleting.value = id
     try {
         await deleteTag(id)
@@ -76,7 +77,7 @@ const handleDelete = async (id: string) => {
 <template>
     <div class="p-4 md:p-6 lg:p-8">
         <div class="flex justify-between items-center mb-6">
-            <h1 class="text-2xl font-bold text-gray-800">Tags</h1>
+            <h1 class="text-2xl font-bold text-gray-800">{{ $t('tags.title') }}</h1>
             <!-- In the future: <Button label="Create Tag" icon="pi pi-plus" /> -->
         </div>
 
@@ -87,7 +88,7 @@ const handleDelete = async (id: string) => {
                 :loading="pending"
                 class="p-datatable-sm"
             >
-                <Column field="name" header="Name" class="w-1/3">
+                <Column field="name" :header="$t('tags.columns.name')" class="w-1/3">
                     <template #body="{ data }">
                         <template v-if="editingTagId === data.id">
                             <form @submit.prevent="saveEdit" id="tag-edit-form">
@@ -107,7 +108,7 @@ const handleDelete = async (id: string) => {
                     </template>
                 </Column>
 
-                <Column field="color" header="Color" class="w-1/3">
+                <Column field="color" :header="$t('tags.columns.color')" class="w-1/3">
                     <template #body="{ data }">
                         <template v-if="editingTagId === data.id">
                             <div class="flex items-center gap-2">
@@ -134,13 +135,13 @@ const handleDelete = async (id: string) => {
                     </template>
                 </Column>
 
-                <Column field="task_count" header="Task Count" class="w-[15%]">
+                <Column field="task_count" :header="$t('tags.columns.taskCount')" class="w-[15%]">
                     <template #body="{ data }">
                         <Badge :value="data.task_count" severity="secondary" />
                     </template>
                 </Column>
 
-                <Column header="Actions" class="w-[15%] text-right" alignFrozen="right">
+                <Column :header="$t('tags.columns.actions')" class="w-[15%] text-right" alignFrozen="right">
                     <template #body="{ data }">
                         <div class="flex justify-end items-center gap-1">
                             <template v-if="editingTagId === data.id">
@@ -153,7 +154,7 @@ const handleDelete = async (id: string) => {
                                         rounded 
                                         text 
                                         severity="success" 
-                                        aria-label="Save" 
+                                        :aria-label="$t('tags.actions.save')" 
                                         form="tag-edit-form"
                                         type="submit"
                                     />
@@ -162,7 +163,7 @@ const handleDelete = async (id: string) => {
                                         rounded 
                                         text 
                                         severity="secondary" 
-                                        aria-label="Cancel" 
+                                        :aria-label="$t('tags.actions.cancel')" 
                                         @click="cancelEdit"
                                     />
                                 </template>
@@ -173,7 +174,7 @@ const handleDelete = async (id: string) => {
                                     rounded 
                                     text 
                                     severity="secondary" 
-                                    aria-label="Edit" 
+                                    :aria-label="$t('tags.actions.edit')" 
                                     :disabled="isPatching || isDeleting === data.id"
                                     @click="startEdit(data)" 
                                 />
@@ -182,7 +183,7 @@ const handleDelete = async (id: string) => {
                                     rounded 
                                     text 
                                     severity="danger" 
-                                    aria-label="Delete" 
+                                    :aria-label="$t('tags.actions.delete')" 
                                     :loading="isDeleting === data.id"
                                     :disabled="isPatching"
                                     @click="handleDelete(data.id)" 
@@ -194,7 +195,7 @@ const handleDelete = async (id: string) => {
                 
                 <template #empty>
                     <div class="p-8 text-center text-gray-500">
-                        No tags found.
+                        {{ $t('tags.messages.empty') }}
                     </div>
                 </template>
             </DataTable>
