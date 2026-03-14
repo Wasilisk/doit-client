@@ -72,6 +72,9 @@
         },
         "tagName": {
           "placeholder": "Назва тегу"
+        },
+        "tagColor": {
+          "label": "Колір тегу"
         }
       },
       "tags": {

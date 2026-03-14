@@ -72,6 +72,9 @@
         },
         "tagName": {
             "placeholder": "Tag name"
+        },
+        "tagColor": {
+            "label": "Tag color"
         }
     },
     "tags": {
