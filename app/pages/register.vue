@@ -3,6 +3,8 @@ import { useForm } from 'vee-validate'
 import { useAuthService } from '~/services/auth.service'
 import { ROUTES } from '~/constants/routes'
 import { registerSchema, type RegisterSchema } from '~/types/schemas/registerSchema'
+import { useMutation } from '@tanstack/vue-query'
+import { useApiErrorHandler } from '~/composables/useApiErrorHandler'
 
 definePageMeta({ layout: 'auth' })
 
@@ -10,6 +12,7 @@ const { t } = useI18n()
 const localePath = useLocalePath()
 const { register } = useAuthService()
 const { setToken } = useAuthStore()
+const { handleError } = useApiErrorHandler()
 
 const { handleSubmit, errors, defineField } = useForm({
   validationSchema: registerSchema,
@@ -20,7 +23,22 @@ const { handleSubmit, errors, defineField } = useForm({
     confirmPassword: '',
   },
 })
-const { loading, execute } = useApiRequestHandler()
+
+const mutation = useMutation({
+  mutationFn: (values: { email: string; fullName: string; password: string }) => register({
+    email: values.email,
+    full_name: values.fullName,
+    password: values.password,
+  }),
+  onSuccess: async (response) => {
+    setToken(response.token)
+    await navigateTo(localePath(ROUTES.TASKS))
+  },
+  onError: (e) => {
+    handleError(e)
+  }
+})
+
 const useAdaptive = useAdaptiveField<RegisterSchema>(defineField, errors)
 
 const [email, emailAttrs] = useAdaptive('email')
@@ -28,18 +46,8 @@ const [fullName, fullNameAttrs] = useAdaptive('fullName')
 const [password, passwordAttrs] = useAdaptive('password')
 const [confirmPassword, confirmPasswordAttrs] = useAdaptive('confirmPassword')
 
-const handleRegister = handleSubmit(async (values) => {
-  await execute(
-    async () => {
-      const response = await register({
-        email: values.email,
-        full_name: values.fullName,
-        password: values.password,
-      })
-      setToken(response.token)
-      await navigateTo(localePath(ROUTES.TASKS))
-    }
-  )
+const handleRegister = handleSubmit((values) => {
+  mutation.mutate(values)
 })
 </script>
 
@@ -56,7 +64,7 @@ const handleRegister = handleSubmit(async (values) => {
         :placeholder="t('fields.confirmPassword.placeholder')" :error="errors.confirmPassword" :feedback="false"
         type="password" />
 
-      <Button type="submit" :label="t('auth.register.submit')" :loading="loading" class="mt-4" />
+      <Button type="submit" :label="t('auth.register.submit')" :loading="mutation.isPending.value" class="mt-4" />
       <p class="flex gap-1 justify-center">
         <i18n-t keypath="auth.register.alreadyHaveAccount">
           <template #link>

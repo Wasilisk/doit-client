@@ -1,10 +1,8 @@
 <script setup lang="ts">
 import { ROUTES } from '~/constants/routes'
 
-const { t } = useI18n()
 const localePath = useLocalePath()
 const authStore = useAuthStore()
-const router = useRouter()
 
 const navLinks = computed(() => [
     { label: 'Profile', icon: 'pi pi-user', to: localePath(ROUTES.PROFILE) },

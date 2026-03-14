@@ -3,6 +3,8 @@ import { useForm } from 'vee-validate'
 import { useAuthService } from '~/services/auth.service'
 import { ROUTES } from '~/constants/routes'
 import { loginSchema, type LoginSchema } from '~/types/schemas/loginSchema'
+import { useMutation } from '@tanstack/vue-query'
+import { useApiErrorHandler } from '~/composables/useApiErrorHandler'
 
 definePageMeta({ layout: 'auth' })
 
@@ -10,6 +12,7 @@ const { t } = useI18n()
 const localePath = useLocalePath()
 const { login } = useAuthService()
 const { setToken, fetchMe } = useAuthStore()
+const { handleError } = useApiErrorHandler()
 
 const { handleSubmit, errors, defineField } = useForm({
     validationSchema: loginSchema,
@@ -20,18 +23,23 @@ const { handleSubmit, errors, defineField } = useForm({
 })
 const useAdaptive = useAdaptiveField<LoginSchema>(defineField, errors)
 
-const { loading, execute } = useApiRequestHandler()
+const mutation = useMutation({
+    mutationFn: (values: { email: string; password: string }) => login({ email: values.email, password: values.password }),
+    onSuccess: async (response) => {
+        setToken(response.token)
+        await fetchMe()
+        await navigateTo(localePath(ROUTES.TASKS))
+    },
+    onError: (e) => {
+        handleError(e)
+    }
+})
 
 const [email, emailAttrs] = useAdaptive('email')
 const [password, passwordAttrs] = useAdaptive('password')
 
-const handleLogin = handleSubmit(async (values) => {
-    await execute(async () => {
-        const response = await login({ email: values.email, password: values.password })
-        setToken(response.token)
-        await fetchMe()
-        await navigateTo(localePath(ROUTES.TASKS))
-    })
+const handleLogin = handleSubmit((values) => {
+    mutation.mutate(values)
 })
 </script>
 
@@ -43,7 +51,7 @@ const handleLogin = handleSubmit(async (values) => {
             <AuthFormField key="password" v-bind="passwordAttrs" v-model="password"
                 :placeholder="t('fields.password.placeholder')" :error="errors.password" type="password"
                 :feedback="false" />
-            <Button type="submit" :label="t('auth.login.submit')" :loading="loading" class="mt-4" />
+            <Button type="submit" :label="t('auth.login.submit')" :loading="mutation.isPending.value" class="mt-4" />
             <p class="flex gap-1 justify-center">
                 <i18n-t keypath="auth.login.dontHaveAccount">
                     <template #link>
