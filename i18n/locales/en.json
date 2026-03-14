@@ -99,5 +99,16 @@
             "deleteConfirm": "Are you sure you want to delete this tag?",
             "empty": "No tags found."
         }
+    },
+    "profile": {
+        "title": "My Profile",
+        "email": "Email Address",
+        "fullName": "Full Name",
+        "actions": {
+            "uploadAvatar": "Upload Photo",
+            "edit": "Edit",
+            "save": "Save",
+            "cancel": "Cancel"
+        }
     }
 }
