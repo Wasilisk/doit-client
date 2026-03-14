@@ -5,18 +5,24 @@ import { useTagService } from '~/services/tag.service'
 import { tagSchema, type TagSchema } from '~/types/schemas/tagSchema'
 import AuthFormField from '~/components/auth/AuthFormField.vue'
 import CreateTagModal from '~/components/tags/CreateTagModal.vue'
+import { useQuery, useMutation, useQueryClient } from '@tanstack/vue-query'
 
 definePageMeta({ layout: 'dashboard' })
 
 const { t } = useI18n()
 const { fetchTags, updateTag, deleteTag } = useTagService()
+const queryClient = useQueryClient()
 
-const { data: tags, refresh, pending } = useAsyncData('tags', () => fetchTags())
+const { data: serverTags } = await useAsyncData('tags-ssr', () => fetchTags())
+
+const { data: tags, isPending: pending } = useQuery({
+    queryKey: ['tags'],
+    queryFn: () => fetchTags(),
+    initialData: serverTags.value || [],
+})
 
 const isCreateModalOpen = ref(false)
 const editingTagId = ref<string | null>(null)
-const isPatching = ref(false)
-const isDeleting = ref<string | null>(null)
 
 const isDeleteDialogOpen = ref(false)
 const pendingDeleteId = ref<string | null>(null)
@@ -46,23 +52,25 @@ const cancelEdit = () => {
     resetForm()
 }
 
-const saveEdit = handleSubmit(async (values) => {
-    if (!editingTagId.value) return
-    isPatching.value = true
-    try {
-        const payload = {
-            name: values.name,
-            color: values.color.startsWith('#') ? values.color : `#${values.color}`
-        }
-        await updateTag(editingTagId.value, payload)
-        await refresh()
+const updateMutation = useMutation({
+    mutationFn: (args: { id: string, payload: any }) => updateTag(args.id, args.payload),
+    onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ['tags'] })
         editingTagId.value = null
         resetForm()
-    } catch (e) {
+    },
+    onError: (e) => {
         console.error(e)
-    } finally {
-        isPatching.value = false
     }
+})
+
+const saveEdit = handleSubmit((values) => {
+    if (!editingTagId.value) return
+    const payload = {
+        name: values.name,
+        color: values.color.startsWith('#') ? values.color : `#${values.color}`
+    }
+    updateMutation.mutate({ id: editingTagId.value, payload })
 })
 
 const confirmDelete = (id: string) => {
@@ -70,19 +78,22 @@ const confirmDelete = (id: string) => {
     isDeleteDialogOpen.value = true
 }
 
-const handleDelete = async () => {
-    if (!pendingDeleteId.value) return
-    isDeleting.value = pendingDeleteId.value
-    try {
-        await deleteTag(pendingDeleteId.value)
-        await refresh()
+const deleteMutation = useMutation({
+    mutationFn: (id: string) => deleteTag(id),
+    onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ['tags'] })
         isDeleteDialogOpen.value = false
-    } catch (e) {
+        pendingDeleteId.value = null
+    },
+    onError: (e) => {
         console.error(e)
-    } finally {
-        isDeleting.value = null
         pendingDeleteId.value = null
     }
+})
+
+const handleDelete = () => {
+    if (!pendingDeleteId.value) return
+    deleteMutation.mutate(pendingDeleteId.value)
 }
 </script>
 
@@ -157,7 +168,7 @@ const handleDelete = async () => {
                     <template #body="{ data }">
                         <div class="flex justify-end items-center gap-1">
                             <template v-if="editingTagId === data.id">
-                                <template v-if="isPatching">
+                                <template v-if="updateMutation.isPending.value">
                                     <i class="pi pi-spinner pi-spin text-xl text-primary p-2"></i>
                                 </template>
                                 <template v-else>
@@ -187,7 +198,7 @@ const handleDelete = async () => {
                                     text 
                                     severity="secondary" 
                                     :aria-label="t('tags.actions.edit')" 
-                                    :disabled="isPatching || isDeleting === data.id"
+                                    :disabled="updateMutation.isPending.value || deleteMutation.isPending.value"
                                     @click="startEdit(data)" 
                                 />
                                 <Button 
@@ -196,8 +207,8 @@ const handleDelete = async () => {
                                     text 
                                     severity="danger" 
                                     :aria-label="t('tags.actions.delete')" 
-                                    :loading="isDeleting === data.id"
-                                    :disabled="isPatching"
+                                    :loading="deleteMutation.isPending.value && pendingDeleteId === data.id"
+                                    :disabled="updateMutation.isPending.value"
                                     @click="confirmDelete(data.id)" 
                                 />
                             </template>
@@ -219,13 +230,12 @@ const handleDelete = async () => {
             :message="t('tags.messages.deleteConfirm')"
             :acceptLabel="t('tags.actions.delete')"
             :rejectLabel="t('tags.actions.cancel')"
-            :loading="!!isDeleting"
+            :loading="deleteMutation.isPending.value"
             @accept="handleDelete"
         />
 
         <CreateTagModal
             v-model:visible="isCreateModalOpen"
-            @created="refresh"
         />
     </div>
 </template>

@@ -4,6 +4,7 @@ import { useForm } from 'vee-validate'
 import { useTagService } from '~/services/tag.service'
 import { tagSchema, type TagSchema } from '~/types/schemas/tagSchema'
 import AuthFormField from '~/components/auth/AuthFormField.vue'
+import { useMutation, useQueryClient } from '@tanstack/vue-query'
 
 const props = defineProps<{
     visible: boolean
@@ -16,8 +17,19 @@ const emit = defineEmits<{
 
 const { t } = useI18n()
 const { createTag } = useTagService()
+const queryClient = useQueryClient()
 
-const isSubmitting = ref(false)
+const mutation = useMutation({
+    mutationFn: (payload: { name: string; color: string }) => createTag(payload),
+    onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ['tags'] })
+        emit('created')
+        emit('update:visible', false)
+    },
+    onError: (e) => {
+        console.error(e)
+    }
+})
 
 const { handleSubmit, errors, defineField, resetForm } = useForm<TagSchema>({
     validationSchema: tagSchema,
@@ -42,21 +54,12 @@ watch(() => props.visible, (newVal) => {
     }
 })
 
-const onSubmit = handleSubmit(async (values) => {
-    isSubmitting.value = true
-    try {
-        const payload = {
-            name: values.name,
-            color: values.color.startsWith('#') ? values.color : `#${values.color}`
-        }
-        await createTag(payload)
-        emit('created')
-        emit('update:visible', false)
-    } catch (e) {
-        console.error(e)
-    } finally {
-        isSubmitting.value = false
+const onSubmit = handleSubmit((values) => {
+    const payload = {
+        name: values.name,
+        color: values.color.startsWith('#') ? values.color : `#${values.color}`
     }
+    mutation.mutate(payload)
 })
 
 const onCancel = () => {
@@ -71,7 +74,7 @@ const onCancel = () => {
         modal 
         :header="t('tags.modal.createTitle')" 
         :style="{ width: '25rem' }" 
-        :closable="!isSubmitting"
+        :closable="!mutation.isPending.value"
     >
         <form @submit.prevent="onSubmit" id="create-tag-form" class="flex flex-col gap-4 mt-2">
             <div>
@@ -104,7 +107,7 @@ const onCancel = () => {
                     :label="t('general.cancel')" 
                     severity="secondary" 
                     @click="onCancel" 
-                    :disabled="isSubmitting" 
+                    :disabled="mutation.isPending.value" 
                     icon="pi pi-times"
                 />
                 <Button 
@@ -112,7 +115,7 @@ const onCancel = () => {
                     form="create-tag-form" 
                     :label="t('tags.actions.create')" 
                     severity="success" 
-                    :loading="isSubmitting" 
+                    :loading="mutation.isPending.value" 
                     icon="pi pi-check"
                 />
             </div>
