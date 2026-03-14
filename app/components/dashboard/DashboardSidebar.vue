@@ -1,43 +1,11 @@
 <script setup lang="ts">
-import { ROUTES } from '~/constants/routes'
+import { useDashboardNav } from '~/composables/useDashboardNav'
 
-const localePath = useLocalePath()
-const authStore = useAuthStore()
-
-const navLinks = computed(() => [
-    { label: 'Profile', icon: 'pi pi-user', to: localePath(ROUTES.PROFILE) },
-    { label: 'My Tasks', icon: 'pi pi-check-square', to: localePath(ROUTES.TASKS) },
-    { label: 'Tags', icon: 'pi pi-tag', to: localePath(ROUTES.TAGS) },
-    { label: 'Deleted Items', icon: 'pi pi-trash', to: localePath(ROUTES.TASKS_DELETED) },
-])
-
-const userInitials = computed(() => {
-    const name = authStore.user?.full_name || ''
-    return name
-        .split(' ')
-        .map((n: string) => n[0])
-        .join('')
-        .toUpperCase()
-        .slice(0, 2)
-})
-
-const fullAvatarUrl = computed(() => {
-    if (!authStore.user?.avatar_url) return null
-    const baseUrl = useRuntimeConfig().public.apiUrl.replace(/\/$/, '')
-    const path = authStore.user.avatar_url.startsWith('/') 
-        ? authStore.user.avatar_url 
-        : `/${authStore.user.avatar_url}`
-    return `${baseUrl}${path}`
-})
-
-const handleLogout = async () => {
-    authStore.logout()
-    await navigateTo(localePath(ROUTES.LOGIN))
-}
+const { navLinks, userInitials, fullAvatarUrl, handleLogout, authStore } = useDashboardNav()
 </script>
 
 <template>
-    <aside class="w-[260px] min-h-screen bg-white flex flex-col border-r border-gray-100">
+    <aside class="hidden md:flex w-[260px] min-h-screen bg-white flex-col border-r border-gray-100">
         <div class="px-6 pt-6 pb-4">
             <h1 class="text-4xl font-bold">
                 DOIT<span class="text-red-500">.</span>

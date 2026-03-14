@@ -34,7 +34,7 @@ export default defineNuxtConfig({
       include: ["Tooltip"],
     },
   },
-  css: ["~/assets/css/main.css", "~/assets/css/tailwind.css"],
+  css: ["~/assets/css/tailwind.css", "primeicons/primeicons.css"],
   i18n: {
     defaultLocale: "en",
     locales: [
