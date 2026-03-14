@@ -31,11 +31,13 @@ const mutation = useMutation({
     }
 })
 
+const getRandomColor = () => Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0')
+
 const { handleSubmit, errors, defineField, resetForm } = useForm<TagSchema>({
     validationSchema: tagSchema,
     initialValues: {
         name: '',
-        color: '000000',
+        color: getRandomColor(),
     },
 })
 
@@ -48,7 +50,7 @@ watch(() => props.visible, (newVal) => {
         resetForm({
             values: {
                 name: '',
-                color: '000000',
+                color: getRandomColor(),
             }
         })
     }
