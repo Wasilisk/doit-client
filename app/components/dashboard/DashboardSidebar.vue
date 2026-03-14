@@ -52,6 +52,11 @@ const handleLogout = async () => {
                 :image="fullAvatarUrl"
                 size="large"
                 shape="circle"
+                :pt="{
+                    image: {
+                        class: 'object-cover'
+                    }
+                }"
             />
             <Avatar
                 v-else
