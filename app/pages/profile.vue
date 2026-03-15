@@ -9,7 +9,6 @@ import {
   profileSchema,
   type ProfileSchema,
 } from "~/types/schemas/profileSchema";
-import AuthFormField from "~/components/auth/AuthFormField.vue";
 
 definePageMeta({ layout: "dashboard" });
 
@@ -160,7 +159,7 @@ const handleSaveName = handleSubmit((values) => {
                     class="flex items-start gap-3 w-full"
                   >
                     <div class="flex-grow">
-                      <AuthFormField
+                      <InputField
                         v-bind="fullNameAttrs"
                         v-model="fullName"
                         :placeholder="t('fields.fullName.placeholder')"
