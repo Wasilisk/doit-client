@@ -3,9 +3,9 @@ import { ref } from "vue";
 import { useForm } from "vee-validate";
 import { useTagService } from "~/services/tag.service";
 import { tagSchema, type TagSchema } from "~/types/schemas/tagSchema";
-import AuthFormField from "~/components/auth/AuthFormField.vue";
 import CreateTagModal from "~/components/tags/CreateTagModal.vue";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/vue-query";
+import InputField from "~/components/common/fields/InputField.vue";
 
 definePageMeta({ layout: "dashboard" });
 
@@ -123,7 +123,7 @@ const handleDelete = () => {
           <template #body="{ data }">
             <template v-if="editingTagId === data.id">
               <form @submit.prevent="saveEdit" id="tag-edit-form">
-                <AuthFormField
+                <InputField
                   v-bind="nameAttrs"
                   v-model="name"
                   :placeholder="t('fields.tagName.placeholder')"
