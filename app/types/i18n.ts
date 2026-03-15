@@ -1,3 +1,3 @@
-export const locales = ['en', 'ua'] as const
+export const locales = ["en", "ua"] as const;
 
-export type Locale = typeof locales[number]
+export type Locale = (typeof locales)[number];

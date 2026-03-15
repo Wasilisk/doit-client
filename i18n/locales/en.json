@@ -1,114 +1,114 @@
 {
+  "general": {
+    "error": "An error occurred",
+    "confirm": "Confirm",
+    "cancel": "Cancel"
+  },
+  "errors": {
+    "INTERNAL_ERROR": "Internal error",
+    "UNAUTHORIZED": "Unauthorized",
+    "NOT_FOUND": "Not found",
+    "VALIDATION_ERROR": "Validation error",
+    "EMAIL_ALREADY_EXISTS": "Email already exists",
+    "INVALID_CREDENTIALS": "Invalid credentials",
+    "PASSWORD_HASHING_FAILED": "Password hashing failed",
+    "PROFILE_CREATION_FAILED": "Profile creation failed",
+    "USER_WITH_EMAIL_NOT_FOUND": "User with given email not found"
+  },
+  "validation": {
     "general": {
-        "error": "An error occurred",
-        "confirm": "Confirm",
-        "cancel": "Cancel"
+      "required": "This field is required"
     },
-    "errors": {
-        "INTERNAL_ERROR": "Internal error",
-        "UNAUTHORIZED": "Unauthorized",
-        "NOT_FOUND": "Not found",
-        "VALIDATION_ERROR": "Validation error",
-        "EMAIL_ALREADY_EXISTS": "Email already exists",
-        "INVALID_CREDENTIALS": "Invalid credentials",
-        "PASSWORD_HASHING_FAILED": "Password hashing failed",
-        "PROFILE_CREATION_FAILED": "Profile creation failed",
-        "USER_WITH_EMAIL_NOT_FOUND": "User with given email not found"
+    "email": {
+      "required": "Email is required",
+      "invalid": "Please enter a valid email"
     },
-    "validation": {
-        "general": {
-            "required": "This field is required"
-        },
-        "email": {
-            "required": "Email is required",
-            "invalid": "Please enter a valid email"
-        },
-        "fullName": {
-            "required": "Full name is required"
-        },
-        "password": {
-            "minLength": "Password must be at least {min} characters long"
-        },
-        "confirmPassword": {
-            "required": "Please confirm your password",
-            "notMatch": "Passwords do not match"
-        },
-        "tagName": {
-            "required": "Tag name is required"
-        },
-        "tagColor": {
-            "required": "Tag color is required"
-        }
+    "fullName": {
+      "required": "Full name is required"
     },
-    "auth": {
-        "register": {
-            "title": "Registration",
-            "alreadyHaveAccount": "Already have an account? {link}",
-            "link": "Login here",
-            "submit": "Register"
-        },
-        "login": {
-            "title": "Login",
-            "dontHaveAccount": "Don't have an account? {link}",
-            "link": "Register here",
-            "submit": "Login"
-        }
+    "password": {
+      "minLength": "Password must be at least {min} characters long"
     },
-    "fields": {
-        "email":  {
-            "placeholder": "Email",
-            "weak_label": "This password is too weak",
-            "medium_label": "This password is medium",
-            "strong_label": "This password is strong"
-        },
-        "fullName": {
-            "placeholder": "Full name"
-        },
-        "password": {
-            "placeholder": "Password"
-        },
-        "confirmPassword": {
-            "placeholder": "Confirm password"
-        },
-        "tagName": {
-            "placeholder": "Tag name"
-        },
-        "tagColor": {
-            "label": "Tag color"
-        }
+    "confirmPassword": {
+      "required": "Please confirm your password",
+      "notMatch": "Passwords do not match"
     },
-    "tags": {
-        "title": "Tags",
-        "columns": {
-            "name": "Name",
-            "color": "Color",
-            "taskCount": "Task Count",
-            "actions": "Actions"
-        },
-        "actions": {
-            "save": "Save",
-            "cancel": "Cancel",
-            "edit": "Edit",
-            "delete": "Delete",
-            "create": "Create"
-        },
-        "modal": {
-            "createTitle": "Create New Tag"
-        },
-        "messages": {
-            "deleteConfirm": "Are you sure you want to delete this tag?",
-            "empty": "No tags found."
-        }
+    "tagName": {
+      "required": "Tag name is required"
     },
-    "profile": {
-        "title": "My Profile",
-        "email": "Email Address",
-        "fullName": "Full Name",
-        "actions": {
-            "uploadAvatar": "Upload Photo",
-            "edit": "Edit",
-            "save": "Save",
-            "cancel": "Cancel"
-        }
+    "tagColor": {
+      "required": "Tag color is required"
     }
+  },
+  "auth": {
+    "register": {
+      "title": "Registration",
+      "alreadyHaveAccount": "Already have an account? {link}",
+      "link": "Login here",
+      "submit": "Register"
+    },
+    "login": {
+      "title": "Login",
+      "dontHaveAccount": "Don't have an account? {link}",
+      "link": "Register here",
+      "submit": "Login"
+    }
+  },
+  "fields": {
+    "email": {
+      "placeholder": "Email",
+      "weak_label": "This password is too weak",
+      "medium_label": "This password is medium",
+      "strong_label": "This password is strong"
+    },
+    "fullName": {
+      "placeholder": "Full name"
+    },
+    "password": {
+      "placeholder": "Password"
+    },
+    "confirmPassword": {
+      "placeholder": "Confirm password"
+    },
+    "tagName": {
+      "placeholder": "Tag name"
+    },
+    "tagColor": {
+      "label": "Tag color"
+    }
+  },
+  "tags": {
+    "title": "Tags",
+    "columns": {
+      "name": "Name",
+      "color": "Color",
+      "taskCount": "Task Count",
+      "actions": "Actions"
+    },
+    "actions": {
+      "save": "Save",
+      "cancel": "Cancel",
+      "edit": "Edit",
+      "delete": "Delete",
+      "create": "Create"
+    },
+    "modal": {
+      "createTitle": "Create New Tag"
+    },
+    "messages": {
+      "deleteConfirm": "Are you sure you want to delete this tag?",
+      "empty": "No tags found."
+    }
+  },
+  "profile": {
+    "title": "My Profile",
+    "email": "Email Address",
+    "fullName": "Full Name",
+    "actions": {
+      "uploadAvatar": "Upload Photo",
+      "edit": "Edit",
+      "save": "Save",
+      "cancel": "Cancel"
+    }
+  }
 }

@@ -7,7 +7,9 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "lint": "eslint .",
+    "prettier": "prettier . --write"
   },
   "dependencies": {
     "@nuxtjs/i18n": "^10.2.3",
