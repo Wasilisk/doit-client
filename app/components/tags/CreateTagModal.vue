@@ -3,8 +3,8 @@ import { ref, watch } from "vue";
 import { useForm } from "vee-validate";
 import { useTagService } from "~/services/tag.service";
 import { tagSchema, type TagSchema } from "~/types/schemas/tagSchema";
-import AuthFormField from "~/components/auth/AuthFormField.vue";
 import { useMutation, useQueryClient } from "@tanstack/vue-query";
+import InputField from "../common/fields/InputField.vue";
 
 const props = defineProps<{
   visible: boolean;
@@ -90,7 +90,7 @@ const onCancel = () => {
       class="flex flex-col gap-4 mt-2"
     >
       <div>
-        <AuthFormField
+        <InputField
           v-bind="nameAttrs"
           v-model="name"
           :placeholder="t('fields.tagName.placeholder')"
