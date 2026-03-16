@@ -12,7 +12,7 @@ export interface FieldError {
 }
 
 export function useApiErrorHandler() {
-  const { t } = useI18n();
+  const { t } = useI18n({ useScope: "global" });
   const toast = useToast();
 
   const isApiError = (e: unknown): e is ApiError =>

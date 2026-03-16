@@ -5,6 +5,7 @@ export default defineNuxtPlugin(() => {
   const store = useAuthStore();
   const config = useRuntimeConfig();
   const router = useRouter();
+  const localePath = useLocalePath();
 
   const api = $fetch.create({
     baseURL: config.public.apiUrl,
@@ -20,8 +21,8 @@ export default defineNuxtPlugin(() => {
       if (response.status === 401) {
         store.logout();
 
-        if (router.currentRoute.value.path !== ROUTES.LOGIN) {
-          await navigateTo(ROUTES.LOGIN);
+        if (router.currentRoute.value.path !== localePath(ROUTES.LOGIN)) {
+          await navigateTo(localePath(ROUTES.LOGIN));
         }
       }
 
