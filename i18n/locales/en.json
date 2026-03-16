@@ -4,17 +4,6 @@
     "confirm": "Confirm",
     "cancel": "Cancel"
   },
-  "errors": {
-    "INTERNAL_ERROR": "Internal error",
-    "UNAUTHORIZED": "Unauthorized",
-    "NOT_FOUND": "Not found",
-    "VALIDATION_ERROR": "Validation error",
-    "EMAIL_ALREADY_EXISTS": "Email already exists",
-    "INVALID_CREDENTIALS": "Invalid credentials",
-    "PASSWORD_HASHING_FAILED": "Password hashing failed",
-    "PROFILE_CREATION_FAILED": "Profile creation failed",
-    "USER_WITH_EMAIL_NOT_FOUND": "User with given email not found"
-  },
   "validation": {
     "general": {
       "required": "This field is required"

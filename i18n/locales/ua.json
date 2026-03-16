@@ -4,17 +4,6 @@
     "confirm": "Підтвердити",
     "cancel": "Скасувати"
   },
-  "errors": {
-    "INTERNAL_ERROR": "Внутрішня помилка",
-    "UNAUTHORIZED": "Не авторизовано",
-    "NOT_FOUND": "Не знайдено",
-    "VALIDATION_ERROR": "Помилка валідації",
-    "EMAIL_ALREADY_EXISTS": "Електронна адреса вже існує",
-    "INVALID_CREDENTIALS": "Невірні облікові дані",
-    "PASSWORD_HASHING_FAILED": "Не вдалося обробити пароль",
-    "PROFILE_CREATION_FAILED": "Не вдалося створити профіль",
-    "USER_WITH_EMAIL_NOT_FOUND": "Користувача з такою електронною адресою не знайдено"
-  },
   "validation": {
     "general": {
       "required": "Це поле є обов’язковим"

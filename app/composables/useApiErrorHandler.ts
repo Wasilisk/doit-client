@@ -12,23 +12,16 @@ export interface FieldError {
 }
 
 export function useApiErrorHandler() {
-  const { t, te } = useI18n();
+  const { t } = useI18n();
   const toast = useToast();
 
   const isApiError = (e: unknown): e is ApiError =>
     typeof e === "object" && e !== null;
 
-  const translate = (
-    key: string,
-    fallback?: string,
-    params?: Record<string, unknown>,
-  ) => (te(key) ? t(key, params ?? {}) : fallback);
-
   const getErrorMessage = (e: unknown): string => {
     if (!isApiError(e)) return t("errors.INTERNAL_ERROR");
 
-    const key = `errors.${e.code}`;
-    return translate(key, e.message) ?? t("errors.INTERNAL_ERROR");
+    return e.message ?? t("errors.INTERNAL_ERROR");
   };
 
   const showToast = (summary: string, detail: string) => {
