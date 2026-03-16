@@ -14,6 +14,8 @@ export default defineNuxtConfig({
   routeRules: {
     "/login": { ssr: false },
     "/register": { ssr: false },
+    "/*/login": { ssr: false },
+    "/*/register": { ssr: false },
   },
   vite: {
     // @ts-expect-error

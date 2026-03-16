@@ -2,10 +2,14 @@ import { ROUTES } from "~/constants/routes";
 
 export default defineNuxtRouteMiddleware((to) => {
   const token = useCookie("auth_token");
+  const localePath = useLocalePath();
   const publicRoutes = [ROUTES.LOGIN, ROUTES.REGISTER];
 
-  if (!token.value && !publicRoutes.includes(to.path)) {
-    const localePath = useLocalePath();
-    return navigateTo(localePath(ROUTES.LOGIN), { redirectCode: 301 });
+  const isPublic = publicRoutes.some(
+    (route) => to.path === localePath(route) || to.path === route,
+  );
+
+  if (!token.value && !isPublic) {
+    return navigateTo(localePath(ROUTES.LOGIN));
   }
 });

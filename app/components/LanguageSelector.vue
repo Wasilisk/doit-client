@@ -4,8 +4,6 @@ import type { Locale } from "~/types/i18n";
 
 const { locale, locales, setLocale } = useI18n();
 
-const selectedLocale = ref(locale.value);
-
 const localeOptions = computed(() =>
   locales.value.map((l) => ({
     label: l.name,
@@ -28,12 +26,11 @@ function localeLabel(code: Locale): string {
 
 async function switchLanguage(e: { value: Locale }) {
   await setLocale(e.value);
-  selectedLocale.value = e.value;
 }
 </script>
 <template>
   <Select
-    v-model="selectedLocale"
+    :model-value="locale"
     :options="localeOptions"
     option-label="label"
     option-value="value"
