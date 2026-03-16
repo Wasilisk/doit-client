@@ -8,6 +8,7 @@
         <slot />
       </div>
       <Toast />
+      <LanguageSelector class="absolute top-4 right-4" />
     </div>
   </div>
 </template>
