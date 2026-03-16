@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useDashboardNav } from "~/composables/useDashboardNav";
+import AppLogo from "~/components/common/AppLogo.vue";
 
 const { navLinks, userInitials, fullAvatarUrl, handleLogout, authStore } =
   useDashboardNav();
@@ -10,52 +11,53 @@ const { navLinks, userInitials, fullAvatarUrl, handleLogout, authStore } =
     class="hidden md:flex w-[260px] min-h-screen bg-white flex-col border-r border-gray-100"
   >
     <div class="px-6 pt-6 pb-4">
-      <Logo />
+      <AppLogo size="3xl" />
     </div>
 
-    <Divider class="my-0" />
-
-    <div
-      class="px-6 py-4 flex items-center gap-3"
-      v-if="!authStore.isFetchingUser && authStore.user"
-    >
-      <Avatar
-        v-if="fullAvatarUrl"
-        :image="fullAvatarUrl"
-        size="large"
-        shape="circle"
-        :pt="{
-          image: {
-            class: 'object-cover',
-          },
-        }"
-      />
-      <Avatar
-        v-else
-        :label="userInitials"
-        size="large"
-        shape="circle"
-        class="bg-amber-100 text-amber-800"
-      />
-      <div class="min-w-0">
-        <p class="font-semibold text-sm text-gray-900 truncate">
-          {{ authStore.user.full_name }}
-        </p>
-        <p class="text-xs text-gray-500 truncate">
-          {{ authStore.user.email }}
-        </p>
+    <div class="px-3">
+      <Divider class="my-0" />
+      <div
+        class="py-4 flex items-center gap-3"
+        v-if="!authStore.isFetchingUser && authStore.user"
+      >
+        <Avatar
+          v-if="fullAvatarUrl"
+          :image="fullAvatarUrl"
+          size="large"
+          shape="circle"
+          :pt="{
+            image: {
+              class: 'object-cover',
+            },
+          }"
+        />
+        <Avatar
+          v-else
+          :label="userInitials"
+          size="large"
+          shape="circle"
+          class="bg-amber-100 text-amber-800"
+        />
+        <div class="min-w-0">
+          <p class="font-semibold text-sm text-gray-900 truncate">
+            {{ authStore.user.full_name }}
+          </p>
+          <p class="text-xs text-gray-500 truncate">
+            {{ authStore.user.email }}
+          </p>
+        </div>
       </div>
-    </div>
 
-    <div class="px-6 py-4 flex items-center gap-3" v-else>
-      <Skeleton shape="circle" size="3rem" />
-      <div class="flex flex-col gap-2 flex-1">
-        <Skeleton width="70%" height="0.75rem" />
-        <Skeleton width="90%" height="0.625rem" />
+      <div class="px-6 py-4 flex items-center gap-3" v-else>
+        <Skeleton shape="circle" size="3rem" />
+        <div class="flex flex-col gap-2 flex-1">
+          <Skeleton width="70%" height="0.75rem" />
+          <Skeleton width="90%" height="0.625rem" />
+        </div>
       </div>
-    </div>
 
-    <Divider class="my-0" />
+      <Divider class="my-0" />
+    </div>
 
     <nav class="flex-1 px-3 py-4 flex flex-col gap-1">
       <NuxtLink

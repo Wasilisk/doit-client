@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import AppLogo from "~/components/common/AppLogo.vue";
+
 const props = defineProps<{
   title: string;
 }>();
@@ -6,9 +8,10 @@ const props = defineProps<{
 
 <template>
   <Card class="w-full max-w-md p-6 shadow-lg rounded-xl">
-    <template #header class="relative">
-      <Logo />
-      <LanguageSelector class="absolute top-4 right-4" />
+    <template #header>
+      <div class="flex justify-center">
+        <AppLogo size="3xl" />
+      </div>
     </template>
     <template #title>
       <h2 class="text-center mb-4">{{ props.title }}</h2>

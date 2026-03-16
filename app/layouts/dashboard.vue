@@ -36,7 +36,7 @@ const menuItems = computed(() => {
     <header
       class="flex md:hidden items-center justify-between px-6 py-4 bg-white border-b border-gray-100 sticky top-0 z-20"
     >
-      <Logo />
+      <AppLogo />
 
       <div
         class="flex items-center gap-2 cursor-pointer"

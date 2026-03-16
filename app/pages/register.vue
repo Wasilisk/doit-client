@@ -9,6 +9,7 @@ import {
 import { useMutation } from "@tanstack/vue-query";
 import { useApiErrorHandler } from "~/composables/useApiErrorHandler";
 import PasswordField from "~/components/common/fields/PasswordField.vue";
+import InputField from "~/components/common/fields/InputField.vue";
 
 definePageMeta({ layout: "auth" });
 
