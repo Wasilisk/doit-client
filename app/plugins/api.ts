@@ -6,6 +6,7 @@ export default defineNuxtPlugin(() => {
   const config = useRuntimeConfig();
   const router = useRouter();
   const localePath = useLocalePath();
+  const { locale } = useNuxtApp().$i18n;
 
   const api = $fetch.create({
     baseURL: config.public.apiUrl,
@@ -15,6 +16,9 @@ export default defineNuxtPlugin(() => {
       }
       if (store.token) {
         options.headers.set("Authorization", `Bearer ${store.token}`);
+      }
+      if (locale.value !== "en") {
+        options.headers.set("Accept-Language", locale.value);
       }
     },
     async onResponseError({ response }) {
