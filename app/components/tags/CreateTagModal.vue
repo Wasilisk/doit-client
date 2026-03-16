@@ -18,6 +18,7 @@ const emit = defineEmits<{
 const { t } = useI18n();
 const { createTag } = useTagService();
 const queryClient = useQueryClient();
+const { handleError } = useApiErrorHandler();
 
 const mutation = useMutation({
   mutationFn: (payload: { name: string; color: string }) => createTag(payload),
@@ -27,7 +28,7 @@ const mutation = useMutation({
     emit("update:visible", false);
   },
   onError: (e) => {
-    console.error(e);
+    handleError(e);
   },
 });
 
