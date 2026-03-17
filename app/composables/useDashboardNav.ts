@@ -5,7 +5,6 @@ export const useDashboardNav = () => {
   const authStore = useAuthStore();
 
   const navLinks = computed(() => [
-    { label: "Profile", icon: "pi pi-user", to: localePath(ROUTES.PROFILE) },
     {
       label: "My Tasks",
       icon: "pi pi-check-square",
@@ -17,6 +16,7 @@ export const useDashboardNav = () => {
       icon: "pi pi-trash",
       to: localePath(ROUTES.TASKS_DELETED),
     },
+    { label: "Settings", icon: "pi pi-cog", to: localePath(ROUTES.SETTINGS) },
   ]);
 
   const userInitials = computed(() => {
