@@ -9,6 +9,7 @@ import {
   profileSchema,
   type ProfileSchema,
 } from "~/types/schemas/profileSchema";
+import InputField from "~/components/common/fields/InputField.vue";
 
 definePageMeta({ layout: "dashboard" });
 
@@ -149,9 +150,10 @@ const handleSaveName = handleSubmit((values) => {
 
           <div class="flex-grow flex flex-col gap-6 w-full">
             <div>
-              <label class="block text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">{{
-                t("profile.fullName")
-              }}</label>
+              <label
+                class="block text-sm font-medium text-gray-500 dark:text-gray-400 mb-1"
+                >{{ t("profile.fullName") }}</label
+              >
               <div class="flex items-center gap-3 w-full">
                 <template v-if="isEditingName">
                   <form
@@ -189,7 +191,9 @@ const handleSaveName = handleSubmit((values) => {
                   </form>
                 </template>
                 <template v-else>
-                  <p class="text-lg font-semibold text-gray-800 dark:text-gray-100 flex-grow">
+                  <p
+                    class="text-lg font-semibold text-gray-800 dark:text-gray-100 flex-grow"
+                  >
                     {{ user.full_name }}
                   </p>
                   <Button
@@ -206,9 +210,10 @@ const handleSaveName = handleSubmit((values) => {
             </div>
 
             <div>
-              <label class="block text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">{{
-                t("profile.email")
-              }}</label>
+              <label
+                class="block text-sm font-medium text-gray-500 dark:text-gray-400 mb-1"
+                >{{ t("profile.email") }}</label
+              >
               <p
                 class="text-lg text-gray-600 dark:text-gray-300 bg-gray-50 dark:bg-gray-700 p-3 rounded-lg border border-gray-100 dark:border-gray-600 flex items-center gap-2"
               >
