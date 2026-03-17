@@ -75,7 +75,7 @@ const handleLogin = handleSubmit((values) => {
           <template #link>
             <NuxtLink
               :to="localePath(ROUTES.REGISTER)"
-              class="text-blue-600 hover:underline font-medium"
+              class="text-blue-600 dark:text-blue-400 hover:underline font-medium"
             >
               {{ t("auth.login.link") }}
             </NuxtLink>

@@ -39,10 +39,10 @@ async function switchLanguage(e: { value: Locale }) {
       root: 'border-none shadow-none min-w-32 rounded-2xl',
       label: 'py-1.5 px-2 text-sm font-medium',
       dropdown: 'w-8',
-      overlay: 'rounded-2xl shadow-xl border border-gray-100 overflow-hidden',
+      overlay: 'rounded-2xl shadow-xl border border-gray-100 dark:border-gray-700 overflow-hidden',
       listContainer: 'p-1.5',
       option:
-        'rounded-xl px-3 py-2 hover:bg-gray-50 transition-colors duration-150 cursor-pointer',
+        'rounded-xl px-3 py-2 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-150 cursor-pointer',
     }"
   >
     <template #value="slotProps">
@@ -57,7 +57,7 @@ async function switchLanguage(e: { value: Locale }) {
     </template>
 
     <template #option="slotProps">
-      <div class="flex items-center gap-2.5 text-sm font-medium text-gray-700">
+      <div class="flex items-center gap-2.5 text-sm font-medium text-gray-700 dark:text-gray-300">
         <vue-country-flag
           :country="localeToCountry(slotProps.option.value)"
           size="small"

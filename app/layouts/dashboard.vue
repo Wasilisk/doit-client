@@ -31,10 +31,10 @@ const menuItems = computed(() => {
 
 <template>
   <div
-    class="min-h-screen flex flex-col md:flex-row bg-gradient-to-br from-amber-50 via-orange-50 to-green-50"
+    class="min-h-screen flex flex-col md:flex-row bg-gradient-to-br from-amber-50 via-orange-50 to-green-50 dark:from-gray-900 dark:via-gray-900 dark:to-gray-900"
   >
     <header
-      class="flex md:hidden items-center justify-between px-6 py-4 bg-white border-b border-gray-100 sticky top-0 z-20"
+      class="flex md:hidden items-center justify-between px-6 py-4 bg-white border-b border-gray-100 sticky top-0 z-20 dark:bg-gray-900 dark:border-gray-700"
     >
       <AppLogo />
 
@@ -56,9 +56,9 @@ const menuItems = computed(() => {
           :label="userInitials"
           size="normal"
           shape="circle"
-          class="bg-amber-100 text-amber-800"
+          class="bg-amber-100 text-amber-800 dark:bg-amber-900 dark:text-amber-200"
         />
-        <i class="pi pi-angle-down text-gray-500 text-sm"></i>
+        <i class="pi pi-angle-down text-gray-500 dark:text-gray-400 text-sm"></i>
       </div>
 
       <Menu

@@ -100,15 +100,15 @@ const onCancel = () => {
       </div>
 
       <div class="flex items-center gap-2">
-        <Label class="block text-md font-medium text-gray-700 mb-1">{{
+        <Label class="block text-md font-medium text-gray-700 dark:text-gray-300 mb-1">{{
           t("fields.tagColor.label")
         }}</Label>
         <div class="flex items-center gap-2">
           <Chip
-            class="px-2 py-1 gap-2 flex items-center border border-gray-200"
+            class="px-2 py-1 gap-2 flex items-center border border-gray-200 dark:border-gray-600"
           >
             <ColorPicker v-bind="colorAttrs" v-model="color" format="hex" />
-            <span class="font-mono text-xs uppercase text-gray-600"
+            <span class="font-mono text-xs uppercase text-gray-600 dark:text-gray-300"
               >#{{ color }}</span
             >
           </Chip>

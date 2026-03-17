@@ -102,7 +102,7 @@ const handleDelete = () => {
 <template>
   <div class="p-4 md:p-6 lg:p-8">
     <div class="flex justify-between items-center mb-6">
-      <h1 class="text-2xl font-bold text-gray-800">{{ t("tags.title") }}</h1>
+      <h1 class="text-2xl font-bold text-gray-800 dark:text-gray-100">{{ t("tags.title") }}</h1>
       <Button
         :label="t('tags.actions.create')"
         icon="pi pi-plus"
@@ -111,7 +111,7 @@ const handleDelete = () => {
     </div>
 
     <div
-      class="bg-white rounded-xl shadow border border-gray-100 overflow-hidden"
+      class="bg-white dark:bg-gray-800 rounded-xl shadow border border-gray-100 dark:border-gray-700 overflow-hidden"
     >
       <DataTable
         :value="tags || []"
@@ -134,7 +134,7 @@ const handleDelete = () => {
               </form>
             </template>
             <template v-else>
-              <span class="font-medium text-gray-800">{{ data.name }}</span>
+              <span class="font-medium text-gray-800 dark:text-gray-100">{{ data.name }}</span>
             </template>
           </template>
         </Column>
@@ -144,14 +144,14 @@ const handleDelete = () => {
             <template v-if="editingTagId === data.id">
               <div class="flex items-center gap-2">
                 <Chip
-                  class="px-2 py-1 gap-2 flex items-center border border-gray-200"
+                  class="px-2 py-1 gap-2 flex items-center border border-gray-200 dark:border-gray-600"
                 >
                   <ColorPicker
                     v-bind="colorAttrs"
                     v-model="color"
                     format="hex"
                   />
-                  <span class="font-mono text-xs uppercase text-gray-600"
+                  <span class="font-mono text-xs uppercase text-gray-600 dark:text-gray-300"
                     >#{{ color }}</span
                   >
                 </Chip>
@@ -162,13 +162,13 @@ const handleDelete = () => {
             </template>
             <template v-else>
               <Chip
-                class="px-2 py-1 gap-2 flex items-center border border-gray-200 bg-white"
+                class="px-2 py-1 gap-2 flex items-center border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800"
               >
                 <span
-                  class="w-4 h-4 rounded-full border border-gray-300 block shadow-sm"
+                  class="w-4 h-4 rounded-full border border-gray-300 dark:border-gray-500 block shadow-sm"
                   :style="{ backgroundColor: data.color }"
                 ></span>
-                <span class="font-mono text-xs text-gray-600 uppercase">{{
+                <span class="font-mono text-xs text-gray-600 dark:text-gray-300 uppercase">{{
                   data.color
                 }}</span>
               </Chip>
@@ -249,7 +249,7 @@ const handleDelete = () => {
         </Column>
 
         <template #empty>
-          <div class="p-8 text-center text-gray-500">
+          <div class="p-8 text-center text-gray-500 dark:text-gray-400">
             {{ t("tags.messages.empty") }}
           </div>
         </template>

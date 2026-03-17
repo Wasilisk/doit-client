@@ -8,7 +8,7 @@ const { navLinks, userInitials, fullAvatarUrl, handleLogout, authStore } =
 
 <template>
   <aside
-    class="hidden md:flex w-[260px] min-h-screen bg-white flex-col border-r border-gray-100"
+    class="hidden md:flex w-[260px] min-h-screen bg-white flex-col border-r border-gray-100 dark:bg-gray-900 dark:border-gray-700"
   >
     <div class="px-6 pt-6 pb-4">
       <AppLogo size="3xl" />
@@ -36,13 +36,13 @@ const { navLinks, userInitials, fullAvatarUrl, handleLogout, authStore } =
           :label="userInitials"
           size="large"
           shape="circle"
-          class="bg-amber-100 text-amber-800"
+          class="bg-amber-100 text-amber-800 dark:bg-amber-900 dark:text-amber-200"
         />
         <div class="min-w-0">
-          <p class="font-semibold text-sm text-gray-900 truncate">
+          <p class="font-semibold text-sm text-gray-900 dark:text-gray-100 truncate">
             {{ authStore.user.full_name }}
           </p>
-          <p class="text-xs text-gray-500 truncate">
+          <p class="text-xs text-gray-500 dark:text-gray-400 truncate">
             {{ authStore.user.email }}
           </p>
         </div>
@@ -64,8 +64,8 @@ const { navLinks, userInitials, fullAvatarUrl, handleLogout, authStore } =
         v-for="link in navLinks"
         :key="link.to"
         :to="link.to"
-        class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-gray-600 transition-colors duration-200 hover:bg-amber-50 hover:text-amber-900"
-        exact-active-class="bg-amber-100 text-amber-900 font-semibold"
+        class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-gray-600 dark:text-gray-300 transition-colors duration-200 hover:bg-amber-50 hover:text-amber-900 dark:hover:bg-amber-900/30 dark:hover:text-amber-200"
+        exact-active-class="bg-amber-100 text-amber-900 font-semibold dark:bg-amber-900/40 dark:text-amber-200"
       >
         <i :class="link.icon" class="text-base"></i>
         <span>{{ link.label }}</span>
@@ -76,7 +76,7 @@ const { navLinks, userInitials, fullAvatarUrl, handleLogout, authStore } =
       <Divider class="mt-0 mb-3" />
       <button
         @click="handleLogout"
-        class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-gray-600 transition-colors duration-200 hover:bg-red-50 hover:text-red-600 w-full cursor-pointer"
+        class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-gray-600 dark:text-gray-300 transition-colors duration-200 hover:bg-red-50 hover:text-red-600 dark:hover:bg-red-900/30 dark:hover:text-red-400 w-full cursor-pointer"
       >
         <i class="pi pi-sign-out text-base"></i>
         <span>Log Out</span>

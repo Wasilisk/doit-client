@@ -93,17 +93,17 @@ const handleSaveName = handleSubmit((values) => {
 <template>
   <div class="p-4 md:p-6 lg:p-8 flex justify-center">
     <div
-      class="w-full max-w-2xl bg-white rounded-xl shadow border border-gray-100 overflow-hidden"
+      class="w-full max-w-2xl bg-white dark:bg-gray-800 rounded-xl shadow border border-gray-100 dark:border-gray-700 overflow-hidden"
     >
       <div class="p-6 md:p-8">
-        <h1 class="text-2xl font-bold text-gray-800 mb-8">
+        <h1 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-8">
           {{ t("profile.title") }}
         </h1>
 
         <div v-if="user" class="flex flex-col md:flex-row gap-8 items-start">
           <div class="flex-shrink-0 relative group">
             <div
-              class="w-32 h-32 md:w-48 md:h-48 rounded-2xl overflow-hidden bg-gray-100 border-2 border-gray-200 shadow-sm relative cursor-pointer"
+              class="w-32 h-32 md:w-48 md:h-48 rounded-2xl overflow-hidden bg-gray-100 dark:bg-gray-700 border-2 border-gray-200 dark:border-gray-600 shadow-sm relative cursor-pointer"
               @mouseenter="isHoveringAvatar = true"
               @mouseleave="isHoveringAvatar = false"
               @click="fileInput?.click()"
@@ -116,7 +116,7 @@ const handleSaveName = handleSubmit((values) => {
               />
               <div
                 v-else
-                class="w-full h-full flex items-center justify-center text-gray-400"
+                class="w-full h-full flex items-center justify-center text-gray-400 dark:text-gray-500"
               >
                 <i class="pi pi-user text-5xl md:text-7xl"></i>
               </div>
@@ -149,7 +149,7 @@ const handleSaveName = handleSubmit((values) => {
 
           <div class="flex-grow flex flex-col gap-6 w-full">
             <div>
-              <label class="block text-sm font-medium text-gray-500 mb-1">{{
+              <label class="block text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">{{
                 t("profile.fullName")
               }}</label>
               <div class="flex items-center gap-3 w-full">
@@ -189,7 +189,7 @@ const handleSaveName = handleSubmit((values) => {
                   </form>
                 </template>
                 <template v-else>
-                  <p class="text-lg font-semibold text-gray-800 flex-grow">
+                  <p class="text-lg font-semibold text-gray-800 dark:text-gray-100 flex-grow">
                     {{ user.full_name }}
                   </p>
                   <Button
@@ -206,13 +206,13 @@ const handleSaveName = handleSubmit((values) => {
             </div>
 
             <div>
-              <label class="block text-sm font-medium text-gray-500 mb-1">{{
+              <label class="block text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">{{
                 t("profile.email")
               }}</label>
               <p
-                class="text-lg text-gray-600 bg-gray-50 p-3 rounded-lg border border-gray-100 flex items-center gap-2"
+                class="text-lg text-gray-600 dark:text-gray-300 bg-gray-50 dark:bg-gray-700 p-3 rounded-lg border border-gray-100 dark:border-gray-600 flex items-center gap-2"
               >
-                <i class="pi pi-envelope text-gray-400"></i>
+                <i class="pi pi-envelope text-gray-400 dark:text-gray-500"></i>
                 {{ user.email }}
               </p>
             </div>
@@ -222,6 +222,8 @@ const handleSaveName = handleSubmit((values) => {
         <div v-else class="flex justify-center p-12">
           <i class="pi pi-spinner pi-spin text-4xl text-primary"></i>
         </div>
+
+        <ThemeSwitcher />
       </div>
     </div>
   </div>
