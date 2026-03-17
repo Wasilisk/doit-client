@@ -34,34 +34,36 @@ async function switchLanguage(e: { value: Locale }) {
     :options="localeOptions"
     option-label="label"
     option-value="value"
+    size="small"
     @change="switchLanguage"
     :pt="{
-      root: 'border-none shadow-none min-w-32 rounded-2xl',
-      label: 'py-1.5 px-2 text-sm font-medium',
+      root: 'border-none shadow-none min-w-32 rounded-lg',
+      label: 'text-sm font-medium',
       dropdown: 'w-8',
-      overlay: 'rounded-2xl shadow-xl border border-gray-100 dark:border-gray-700 overflow-hidden',
-      listContainer: 'p-1.5',
+      overlay:
+        'rounded-lg shadow-xl border border-gray-100 dark:border-gray-700 overflow-hidden',
+      listContainer: 'p-0.5',
       option:
-        'rounded-xl px-3 py-2 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-150 cursor-pointer',
+        'p-1 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-150 cursor-pointer',
     }"
   >
     <template #value="slotProps">
-      <div class="flex items-center gap-2 text-sm font-medium">
+      <div class="flex items-center justify-center gap-2 text-sm font-medium">
         <vue-country-flag
           :country="localeToCountry(slotProps.value)"
-          size="small"
-          class="rounded-sm shadow-sm"
+          class="rounded-sm shadow-sm p-0! my-[-6px]!"
         />
         <span>{{ localeLabel(slotProps.value) }}</span>
       </div>
     </template>
 
     <template #option="slotProps">
-      <div class="flex items-center gap-2.5 text-sm font-medium text-gray-700 dark:text-gray-300">
+      <div
+        class="flex items-center justify-center gap-2.5 text-sm font-medium text-gray-700 dark:text-gray-300"
+      >
         <vue-country-flag
           :country="localeToCountry(slotProps.option.value)"
-          size="small"
-          class="rounded-sm shadow-sm"
+          class="rounded-sm shadow-sm p-0! my-[-6px]!"
         />
         <span>{{ slotProps.option.label }}</span>
       </div>

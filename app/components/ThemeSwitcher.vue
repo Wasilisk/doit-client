@@ -48,17 +48,16 @@ onMounted(() => {
       v-model="selectedTheme"
       :options="themeOptions"
       option-value="value"
-      class="theme-select-btn"
       :allow-empty="false"
       @change="onThemeChange"
     >
       <template #option="{ option }">
         <span
-          class="theme-option"
+          class="flex items-center"
           :class="{ active: selectedTheme === option.value }"
         >
-          <i :class="option.icon" class="theme-icon" />
-          <span class="theme-label">{{ option.label }}</span>
+          <i class="mr-2" :class="option.icon" />
+          <span>{{ option.label }}</span>
         </span>
       </template>
     </SelectButton>

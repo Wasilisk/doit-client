@@ -17,7 +17,6 @@ const { t } = useI18n();
 const authStore = useAuthStore();
 const { updateUserProfile } = useAuthService();
 const { handleError } = useApiErrorHandler();
-const queryClient = useQueryClient();
 const config = useRuntimeConfig();
 
 const user = computed(() => authStore.user);
@@ -92,15 +91,12 @@ const handleSaveName = handleSubmit((values) => {
 </script>
 
 <template>
-  <div class="p-4 md:p-6 lg:p-8 flex justify-center">
-    <div
-      class="w-full max-w-2xl bg-white dark:bg-gray-800 rounded-xl shadow border border-gray-100 dark:border-gray-700 overflow-hidden"
-    >
-      <div class="p-6 md:p-8">
-        <h1 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-8">
-          {{ t("profile.title") }}
-        </h1>
-
+  <div class="p-4 md:p-6 lg:p-8 flex flex-col gap-4 justify-center">
+    <Card class="w-full">
+      <template #title>
+        {{ t("settings.profile.title") }}
+      </template>
+      <template #content>
         <div v-if="user" class="flex flex-col md:flex-row gap-8 items-start">
           <div class="flex-shrink-0 relative group">
             <div
@@ -227,9 +223,22 @@ const handleSaveName = handleSubmit((values) => {
         <div v-else class="flex justify-center p-12">
           <i class="pi pi-spinner pi-spin text-4xl text-primary"></i>
         </div>
-
-        <ThemeSwitcher />
-      </div>
-    </div>
+      </template>
+    </Card>
+    <Card>
+      <template #title>{{ t("settings.preferences.title") }}</template>
+      <template #content>
+        <div class="flex flex-col gap-4">
+          <div class="flex items-center gap-2">
+            <Label>{{ t("settings.preferences.theme") }}</Label>
+            <ThemeSwitcher />
+          </div>
+          <div class="flex items-center gap-2">
+            <Label>{{ t("settings.preferences.language") }}</Label>
+            <LanguageSelector />
+          </div>
+        </div>
+      </template>
+    </Card>
   </div>
 </template>

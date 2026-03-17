@@ -89,15 +89,22 @@
       "empty": "No tags found."
     }
   },
-  "profile": {
-    "title": "My Profile",
-    "email": "Email Address",
-    "fullName": "Full Name",
-    "actions": {
-      "uploadAvatar": "Upload Photo",
-      "edit": "Edit",
-      "save": "Save",
-      "cancel": "Cancel"
+  "settings": {
+    "profile": {
+      "title": "My Profile",
+      "email": "Email Address",
+      "fullName": "Full Name",
+      "actions": {
+        "uploadAvatar": "Upload Photo",
+        "edit": "Edit",
+        "save": "Save",
+        "cancel": "Cancel"
+      }
+    },
+    "preferences": {
+      "title": "Preferences",
+      "theme": "Theme",
+      "language": "Language"
     }
   }
 }
