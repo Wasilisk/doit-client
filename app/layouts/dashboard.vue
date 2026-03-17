@@ -3,8 +3,9 @@ import { ref, computed } from "vue";
 import { useDashboardNav } from "~/composables/useDashboardNav";
 import Menu from "primevue/menu";
 
-const { navLinks, userInitials, fullAvatarUrl, handleLogout, authStore } =
+const { navLinks, userInitials, fullAvatarUrl, handleLogout } =
   useDashboardNav();
+const { t } = useI18n();
 
 const menu = ref<InstanceType<typeof Menu> | null>(null);
 
@@ -14,13 +15,13 @@ const toggleMenu = (event: Event) => {
 
 const menuItems = computed(() => {
   const items = navLinks.value.map((link) => ({
-    label: link.label,
+    label: t(link.label),
     icon: link.icon,
     command: () => navigateTo(link.to),
   }));
 
   items.push({
-    label: "Log Out",
+    label: t("navigation.logout"),
     icon: "pi pi-sign-out",
     command: handleLogout,
   });
@@ -58,7 +59,9 @@ const menuItems = computed(() => {
           shape="circle"
           class="bg-amber-100 text-amber-800 dark:bg-amber-900 dark:text-amber-200"
         />
-        <i class="pi pi-angle-down text-gray-500 dark:text-gray-400 text-sm"></i>
+        <i
+          class="pi pi-angle-down text-gray-500 dark:text-gray-400 text-sm"
+        ></i>
       </div>
 
       <Menu

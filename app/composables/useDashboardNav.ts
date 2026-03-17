@@ -6,17 +6,25 @@ export const useDashboardNav = () => {
 
   const navLinks = computed(() => [
     {
-      label: "My Tasks",
+      label: "navigation.myTasks",
       icon: "pi pi-check-square",
       to: localePath(ROUTES.TASKS),
     },
-    { label: "Tags", icon: "pi pi-tag", to: localePath(ROUTES.TAGS) },
     {
-      label: "Deleted Items",
+      label: "navigation.tags",
+      icon: "pi pi-tag",
+      to: localePath(ROUTES.TAGS),
+    },
+    {
+      label: "navigation.deletedItems",
       icon: "pi pi-trash",
       to: localePath(ROUTES.TASKS_DELETED),
     },
-    { label: "Settings", icon: "pi pi-cog", to: localePath(ROUTES.SETTINGS) },
+    {
+      label: "navigation.settings",
+      icon: "pi pi-cog",
+      to: localePath(ROUTES.SETTINGS),
+    },
   ]);
 
   const userInitials = computed(() => {

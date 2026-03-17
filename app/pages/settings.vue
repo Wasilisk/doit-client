@@ -129,7 +129,7 @@ const handleSaveName = handleSubmit((values) => {
                 <template v-else>
                   <i class="pi pi-camera text-3xl mb-2"></i>
                   <span class="text-sm font-medium">{{
-                    t("profile.actions.uploadAvatar")
+                    t("settings.profile.actions.uploadAvatar")
                   }}</span>
                 </template>
               </div>
@@ -148,7 +148,7 @@ const handleSaveName = handleSubmit((values) => {
             <div>
               <label
                 class="block text-sm font-medium text-gray-500 dark:text-gray-400 mb-1"
-                >{{ t("profile.fullName") }}</label
+                >{{ t("settings.profile.fullName") }}</label
               >
               <div class="flex items-center gap-3 w-full">
                 <template v-if="isEditingName">
@@ -172,7 +172,7 @@ const handleSaveName = handleSubmit((values) => {
                       text
                       rounded
                       :loading="mutation.isPending.value"
-                      :aria-label="t('profile.actions.save')"
+                      :aria-label="t('settings.profile.actions.save')"
                     />
                     <Button
                       type="button"
@@ -182,7 +182,7 @@ const handleSaveName = handleSubmit((values) => {
                       rounded
                       @click="cancelEditingName"
                       :disabled="mutation.isPending.value"
-                      :aria-label="t('profile.actions.cancel')"
+                      :aria-label="t('settings.profile.actions.cancel')"
                     />
                   </form>
                 </template>
@@ -198,7 +198,7 @@ const handleSaveName = handleSubmit((values) => {
                     text
                     rounded
                     @click="startEditingName"
-                    :aria-label="t('profile.actions.edit')"
+                    :aria-label="t('settings.profile.actions.edit')"
                     :disabled="mutation.isPending.value"
                   />
                 </template>
@@ -208,7 +208,7 @@ const handleSaveName = handleSubmit((values) => {
             <div>
               <label
                 class="block text-sm font-medium text-gray-500 dark:text-gray-400 mb-1"
-                >{{ t("profile.email") }}</label
+                >{{ t("settings.profile.email") }}</label
               >
               <p
                 class="text-lg text-gray-600 dark:text-gray-300 bg-gray-50 dark:bg-gray-700 p-3 rounded-lg border border-gray-100 dark:border-gray-600 flex items-center gap-2"

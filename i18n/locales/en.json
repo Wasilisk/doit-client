@@ -66,6 +66,13 @@
       "label": "Tag color"
     }
   },
+  "navigation": {
+    "myTasks": "My Tasks",
+    "tags": "Tags",
+    "deletedItems": "Deleted Items",
+    "settings": "Settings",
+    "logout": "Logout"
+  },
   "tags": {
     "title": "Tags",
     "columns": {

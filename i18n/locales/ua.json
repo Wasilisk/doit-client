@@ -66,6 +66,13 @@
       "label": "Колір тегу"
     }
   },
+  "navigation": {
+    "myTasks": "Мої завдання",
+    "tags": "Теги",
+    "deletedItems": "Видалені елементи",
+    "settings": "Налаштування",
+    "logout": "Вийти"
+  },
   "tags": {
     "title": "Теги",
     "columns": {

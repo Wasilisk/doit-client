@@ -4,6 +4,8 @@ import AppLogo from "~/components/common/AppLogo.vue";
 
 const { navLinks, userInitials, fullAvatarUrl, handleLogout, authStore } =
   useDashboardNav();
+
+const { t } = useI18n();
 </script>
 
 <template>
@@ -39,7 +41,9 @@ const { navLinks, userInitials, fullAvatarUrl, handleLogout, authStore } =
           class="bg-amber-100 text-amber-800 dark:bg-amber-900 dark:text-amber-200"
         />
         <div class="min-w-0">
-          <p class="font-semibold text-sm text-gray-900 dark:text-gray-100 truncate">
+          <p
+            class="font-semibold text-sm text-gray-900 dark:text-gray-100 truncate"
+          >
             {{ authStore.user.full_name }}
           </p>
           <p class="text-xs text-gray-500 dark:text-gray-400 truncate">
@@ -68,7 +72,7 @@ const { navLinks, userInitials, fullAvatarUrl, handleLogout, authStore } =
         exact-active-class="bg-amber-100 text-amber-900 font-semibold dark:bg-amber-900/40 dark:text-amber-200"
       >
         <i :class="link.icon" class="text-base"></i>
-        <span>{{ link.label }}</span>
+        <span>{{ t(link.label) }}</span>
       </NuxtLink>
     </nav>
 
@@ -79,7 +83,7 @@ const { navLinks, userInitials, fullAvatarUrl, handleLogout, authStore } =
         class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-gray-600 dark:text-gray-300 transition-colors duration-200 hover:bg-red-50 hover:text-red-600 dark:hover:bg-red-900/30 dark:hover:text-red-400 w-full cursor-pointer"
       >
         <i class="pi pi-sign-out text-base"></i>
-        <span>Log Out</span>
+        <span>{{ t("navigation.logout") }}</span>
       </button>
     </div>
   </aside>
