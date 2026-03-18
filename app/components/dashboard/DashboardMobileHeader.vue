@@ -2,8 +2,9 @@
 import { ref, computed } from "vue";
 import { useDashboardNav } from "~/composables/useDashboardNav";
 import Menu from "primevue/menu";
+import AppLogo from "~/components/common/AppLogo.vue";
 
-const { navLinks, userInitials, handleLogout, authStore } = useDashboardNav();
+const { navLinks, handleLogout, authStore } = useDashboardNav();
 const { t } = useI18n();
 
 const menu = ref<InstanceType<typeof Menu> | null>(null);
@@ -33,7 +34,7 @@ const menuItems = computed(() => {
   <header
     class="flex md:hidden items-center justify-between px-6 py-4 bg-white border-b border-gray-100 sticky top-0 z-20 dark:bg-gray-900 dark:border-gray-700"
   >
-    <AppLogo />
+    <AppLogo size="xl" />
 
     <div
       class="flex items-center gap-2 cursor-pointer"
@@ -41,24 +42,8 @@ const menuItems = computed(() => {
       aria-haspopup="true"
       aria-controls="mobile_user_menu"
     >
-      <Avatar
-        v-if="authStore.user?.avatar_url"
-        :image="authStore.user.avatar_url"
-        size="normal"
-        shape="circle"
-        :pt="{
-          image: {
-            class: 'object-cover',
-          },
-        }"
-      />
-      <Avatar
-        v-else
-        :label="userInitials"
-        size="normal"
-        shape="circle"
-        class="bg-amber-100 text-amber-800 dark:bg-amber-900 dark:text-amber-200"
-      />
+      <UserAvatar v-if="authStore.user" :user="authStore.user" size="normal" />
+      <Skeleton v-else size="normal" shape="circle" />
       <i class="pi pi-angle-down text-gray-500 dark:text-gray-400 text-sm"></i>
     </div>
 

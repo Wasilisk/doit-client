@@ -2,7 +2,7 @@
 import { useDashboardNav } from "~/composables/useDashboardNav";
 import AppLogo from "~/components/common/AppLogo.vue";
 
-const { navLinks, userInitials, handleLogout, authStore } = useDashboardNav();
+const { navLinks, handleLogout, authStore } = useDashboardNav();
 
 const { t } = useI18n();
 </script>
@@ -21,24 +21,7 @@ const { t } = useI18n();
         class="py-4 flex items-center gap-3"
         v-if="!authStore.isFetchingUser && authStore.user"
       >
-        <Avatar
-          v-if="authStore.user?.avatar_url"
-          :image="authStore.user.avatar_url"
-          size="large"
-          shape="circle"
-          :pt="{
-            image: {
-              class: 'object-cover',
-            },
-          }"
-        />
-        <Avatar
-          v-else
-          :label="userInitials"
-          size="large"
-          shape="circle"
-          class="bg-amber-100 text-amber-800 dark:bg-amber-900 dark:text-amber-200"
-        />
+        <UserAvatar :user="authStore.user" size="large" />
         <div class="min-w-0">
           <p
             class="font-semibold text-sm text-gray-900 dark:text-gray-100 truncate"

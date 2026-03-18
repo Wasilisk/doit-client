@@ -27,16 +27,6 @@ export const useDashboardNav = () => {
     },
   ]);
 
-  const userInitials = computed(() => {
-    const name = authStore.user?.full_name || "";
-    return name
-      .split(" ")
-      .map((n: string) => n[0])
-      .join("")
-      .toUpperCase()
-      .slice(0, 2);
-  });
-
   const handleLogout = async () => {
     authStore.logout();
     await navigateTo(localePath(ROUTES.LOGIN));
@@ -44,7 +34,6 @@ export const useDashboardNav = () => {
 
   return {
     navLinks,
-    userInitials,
     handleLogout,
     authStore,
   };
