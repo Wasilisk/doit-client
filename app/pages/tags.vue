@@ -5,7 +5,6 @@ import { useTagService } from "~/services/tag.service";
 import { tagSchema, type TagSchema } from "~/types/schemas/tagSchema";
 import CreateTagModal from "~/components/tags/CreateTagModal.vue";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/vue-query";
-import InputField from "~/components/common/fields/InputField.vue";
 
 definePageMeta({ layout: "dashboard" });
 
@@ -102,7 +101,9 @@ const handleDelete = () => {
 <template>
   <div class="p-4 md:p-6 lg:p-8">
     <div class="flex justify-between items-center mb-6">
-      <h1 class="text-2xl font-bold text-gray-800 dark:text-gray-100">{{ t("tags.title") }}</h1>
+      <h1 class="text-2xl font-bold text-gray-800 dark:text-gray-100">
+        {{ t("tags.title") }}
+      </h1>
       <Button
         :label="t('tags.actions.create')"
         icon="pi pi-plus"
@@ -123,7 +124,7 @@ const handleDelete = () => {
           <template #body="{ data }">
             <template v-if="editingTagId === data.id">
               <form @submit.prevent="saveEdit" id="tag-edit-form">
-                <InputField
+                <FieldInput
                   v-bind="nameAttrs"
                   v-model="name"
                   :placeholder="t('fields.tagName.placeholder')"
@@ -134,7 +135,9 @@ const handleDelete = () => {
               </form>
             </template>
             <template v-else>
-              <span class="font-medium text-gray-800 dark:text-gray-100">{{ data.name }}</span>
+              <span class="font-medium text-gray-800 dark:text-gray-100">{{
+                data.name
+              }}</span>
             </template>
           </template>
         </Column>
@@ -151,7 +154,8 @@ const handleDelete = () => {
                     v-model="color"
                     format="hex"
                   />
-                  <span class="font-mono text-xs uppercase text-gray-600 dark:text-gray-300"
+                  <span
+                    class="font-mono text-xs uppercase text-gray-600 dark:text-gray-300"
                     >#{{ color }}</span
                   >
                 </Chip>
@@ -168,9 +172,10 @@ const handleDelete = () => {
                   class="w-4 h-4 rounded-full border border-gray-300 dark:border-gray-500 block shadow-sm"
                   :style="{ backgroundColor: data.color }"
                 ></span>
-                <span class="font-mono text-xs text-gray-600 dark:text-gray-300 uppercase">{{
-                  data.color
-                }}</span>
+                <span
+                  class="font-mono text-xs text-gray-600 dark:text-gray-300 uppercase"
+                  >{{ data.color }}</span
+                >
               </Chip>
             </template>
           </template>

@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { useDashboardNav } from "~/composables/useDashboardNav";
-import AppLogo from "~/components/common/AppLogo.vue";
 
 const { navLinks, handleLogout, authStore } = useDashboardNav();
 

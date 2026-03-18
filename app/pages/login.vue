@@ -5,8 +5,6 @@ import { ROUTES } from "~/constants/routes";
 import { loginSchema, type LoginSchema } from "~/types/schemas/loginSchema";
 import { useMutation } from "@tanstack/vue-query";
 import { useApiErrorHandler } from "~/composables/useApiErrorHandler";
-import InputField from "~/components/common/fields/InputField.vue";
-import PasswordField from "~/components/common/fields/PasswordField.vue";
 
 definePageMeta({ layout: "auth" });
 
@@ -49,14 +47,14 @@ const handleLogin = handleSubmit((values) => {
 <template>
   <AuthCard :title="t('auth.login.title')">
     <form @submit.prevent="handleLogin" class="flex flex-col gap-4">
-      <InputField
+      <FieldInput
         key="email"
         v-bind="emailAttrs"
         v-model="email"
         :placeholder="t('fields.email.placeholder')"
         :error="errors.email"
       />
-      <PasswordField
+      <FieldPassword
         key="password"
         v-bind="passwordAttrs"
         v-model="password"

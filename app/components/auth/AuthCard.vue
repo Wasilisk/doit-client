@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import AppLogo from "~/components/common/AppLogo.vue";
-
 const props = defineProps<{
   title: string;
 }>();

@@ -2,7 +2,6 @@
 import { ref, computed } from "vue";
 import { useDashboardNav } from "~/composables/useDashboardNav";
 import Menu from "primevue/menu";
-import AppLogo from "~/components/common/AppLogo.vue";
 
 const { navLinks, handleLogout, authStore } = useDashboardNav();
 const { t } = useI18n();

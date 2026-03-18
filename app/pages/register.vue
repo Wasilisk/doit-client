@@ -8,8 +8,6 @@ import {
 } from "~/types/schemas/registerSchema";
 import { useMutation } from "@tanstack/vue-query";
 import { useApiErrorHandler } from "~/composables/useApiErrorHandler";
-import PasswordField from "~/components/common/fields/PasswordField.vue";
-import InputField from "~/components/common/fields/InputField.vue";
 
 definePageMeta({ layout: "auth" });
 
@@ -60,28 +58,28 @@ const handleRegister = handleSubmit((values) => {
 <template>
   <AuthCard :title="t('auth.register.title')">
     <form @submit.prevent="handleRegister" class="flex flex-col gap-2">
-      <InputField
+      <FieldInput
         key="email"
         v-bind="emailAttrs"
         v-model="email"
         :placeholder="t('fields.email.placeholder')"
         :error="errors.email"
       />
-      <InputField
+      <FieldInput
         key="fullName"
         v-bind="fullNameAttrs"
         v-model="fullName"
         :placeholder="t('fields.fullName.placeholder')"
         :error="errors.fullName"
       />
-      <PasswordField
+      <FieldPassword
         key="password"
         v-bind="passwordAttrs"
         v-model="password"
         :placeholder="t('fields.password.placeholder')"
         :error="errors.password"
       />
-      <PasswordField
+      <FieldPassword
         key="confirmPassword"
         v-bind="confirmPasswordAttrs"
         v-model="confirmPassword"

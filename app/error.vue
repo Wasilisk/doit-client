@@ -11,3 +11,5 @@ if (props.error.statusCode === 404) {
   await navigateTo(localePath(ROUTES.TASKS), { redirectCode: 301 });
 }
 </script>
+
+<template></template>

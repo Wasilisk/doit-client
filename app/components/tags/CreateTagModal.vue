@@ -1,10 +1,9 @@
 <script setup lang="ts">
-import { ref, watch } from "vue";
+import { watch } from "vue";
 import { useForm } from "vee-validate";
 import { useTagService } from "~/services/tag.service";
 import { tagSchema, type TagSchema } from "~/types/schemas/tagSchema";
 import { useMutation, useQueryClient } from "@tanstack/vue-query";
-import InputField from "../common/fields/InputField.vue";
 
 const props = defineProps<{
   visible: boolean;
@@ -91,7 +90,7 @@ const onCancel = () => {
       class="flex flex-col gap-4 mt-2"
     >
       <div>
-        <InputField
+        <FieldInput
           v-bind="nameAttrs"
           v-model="name"
           :placeholder="t('fields.tagName.placeholder')"
@@ -100,15 +99,17 @@ const onCancel = () => {
       </div>
 
       <div class="flex items-center gap-2">
-        <Label class="block text-md font-medium text-gray-700 dark:text-gray-300 mb-1">{{
-          t("fields.tagColor.label")
-        }}</Label>
+        <Label
+          class="block text-md font-medium text-gray-700 dark:text-gray-300 mb-1"
+          >{{ t("fields.tagColor.label") }}</Label
+        >
         <div class="flex items-center gap-2">
           <Chip
             class="px-2 py-1 gap-2 flex items-center border border-gray-200 dark:border-gray-600"
           >
             <ColorPicker v-bind="colorAttrs" v-model="color" format="hex" />
-            <span class="font-mono text-xs uppercase text-gray-600 dark:text-gray-300"
+            <span
+              class="font-mono text-xs uppercase text-gray-600 dark:text-gray-300"
               >#{{ color }}</span
             >
           </Chip>

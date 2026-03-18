@@ -9,7 +9,6 @@ import {
   profileSchema,
   type ProfileSchema,
 } from "~/types/schemas/profileSchema";
-import InputField from "~/components/common/fields/InputField.vue";
 
 definePageMeta({ layout: "dashboard" });
 
@@ -157,7 +156,7 @@ const handleSaveName = handleSubmit((values) => {
                     class="flex items-start gap-3 w-full"
                   >
                     <div class="flex-grow">
-                      <InputField
+                      <FieldInput
                         v-bind="fullNameAttrs"
                         v-model="fullName"
                         :placeholder="t('fields.fullName.placeholder')"
