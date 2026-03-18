@@ -37,15 +37,6 @@ export const useDashboardNav = () => {
       .slice(0, 2);
   });
 
-  const fullAvatarUrl = computed(() => {
-    if (!authStore.user?.avatar_url) return null;
-    const baseUrl = useRuntimeConfig().public.apiUrl.replace(/\/$/, "");
-    const path = authStore.user.avatar_url.startsWith("/")
-      ? authStore.user.avatar_url
-      : `/${authStore.user.avatar_url}`;
-    return `${baseUrl}${path}`;
-  });
-
   const handleLogout = async () => {
     authStore.logout();
     await navigateTo(localePath(ROUTES.LOGIN));
@@ -54,7 +45,6 @@ export const useDashboardNav = () => {
   return {
     navLinks,
     userInitials,
-    fullAvatarUrl,
     handleLogout,
     authStore,
   };

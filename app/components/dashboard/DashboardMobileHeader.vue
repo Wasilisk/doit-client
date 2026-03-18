@@ -3,8 +3,7 @@ import { ref, computed } from "vue";
 import { useDashboardNav } from "~/composables/useDashboardNav";
 import Menu from "primevue/menu";
 
-const { navLinks, userInitials, fullAvatarUrl, handleLogout } =
-  useDashboardNav();
+const { navLinks, userInitials, handleLogout, authStore } = useDashboardNav();
 const { t } = useI18n();
 
 const menu = ref<InstanceType<typeof Menu> | null>(null);
@@ -43,11 +42,15 @@ const menuItems = computed(() => {
       aria-controls="mobile_user_menu"
     >
       <Avatar
-        v-if="fullAvatarUrl"
-        :image="fullAvatarUrl"
+        v-if="authStore.user?.avatar_url"
+        :image="authStore.user.avatar_url"
         size="normal"
         shape="circle"
-        image-class="object-cover"
+        :pt="{
+          image: {
+            class: 'object-cover',
+          },
+        }"
       />
       <Avatar
         v-else
